@@ -162,7 +162,6 @@ in
     promptInit = "source ${gomer-zsh-theme}/share/zsh/themes/gomer.zsh-theme";
     ohMyZsh = {
       enable = true;
-      theme = "gomer";
       plugins = [
         "sudo"
         "git"
