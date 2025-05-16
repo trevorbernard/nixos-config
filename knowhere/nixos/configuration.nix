@@ -113,7 +113,7 @@ in
       claude-code
       cmake
       direnv
-      emacs-pgtk
+      emacs-nox
       gnumake
       keepassxc
       jq
@@ -124,13 +124,13 @@ in
       ripgrep
       signal-desktop
       slack
+      starship
       stow
       tig
-      tmux
-      xorg.xdpyinfo
-      zoxide
     ];
   };
+
+  environment.variables.COLORTERM = "truecolor";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -143,6 +143,7 @@ in
     aspellDicts.en
     aspellDicts.en-computers
     aspellDicts.en-science
+    bat
     ghostty
     git
     gnome-tweaks
@@ -150,28 +151,34 @@ in
     nil
     mosh
     oh-my-zsh
+    tmux
     vim
     zsh
+    zoxide
+    wl-clipboard
   ];
 
   users.defaultUserShell = pkgs.zsh;
   environment.shells = [ pkgs.zsh ];
 
+  environment.sessionVariables = {
+    PATH="$HOME/bin:$PATH";
+  };
   programs.zsh = {
     enable = true;
-    promptInit = "source ${gomer-zsh-theme}/share/zsh/themes/gomer.zsh-theme";
+    # promptInit = "source ${gomer-zsh-theme}/share/zsh/themes/gomer.zsh-theme";
     ohMyZsh = {
       enable = true;
       plugins = [
-        "sudo"
-        "git"
         "direnv"
+        "git"
+        "sudo"
       ];
     };
   };    
   
   environment.variables.TERM = "xterm-direct";
-  environment.variables.EDITOR = "emacs -nw";
+  environment.variables.EDITOR = "emacs";
 
   fonts.packages = with pkgs; [
     fira-code
@@ -183,6 +190,23 @@ in
   programs.dconf.enable = true;
   services.dbus.packages = [ pkgs.dconf ];
 
+  programs.dconf = {
+    profiles.user.databases = [
+      {
+        lockAll = true; # prevents overriding
+        settings =
+          let
+            empty = lib.gvariant.mkEmptyArray lib.gvariant.type.string;
+          in 
+            {
+              "org/gnome/desktop/wm/keybindings" = {
+                activate-window-menu=empty;
+              };
+            };
+      }
+    ];
+  };
+
   # Configure GNOME to use Emacs keybindings
   programs.gnome-terminal.enable = true;
 
@@ -191,6 +215,13 @@ in
     [org.gnome.desktop.interface]
     gtk-key-theme='Emacs'
   '';
+
+  # environment.etc."xdg/gtk-3.0/settings.ini" = {
+  #   text = ''
+  #     [Settings]
+  #     gtk-key-theme-name=Emacs
+  #   '';
+  # };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
