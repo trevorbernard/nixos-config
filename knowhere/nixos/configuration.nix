@@ -2,7 +2,6 @@
 
 let
   claude-code = pkgs.callPackage ./nix/claude-code/default.nix {};
-  gomer-zsh-theme = pkgs.callPackage ./nix/gomer-zsh-theme/default.nix {};
 in
 {
   imports =
@@ -21,7 +20,7 @@ in
     GDK_SCALE = "1";
     GDK_DPI_SCALE = "1";
   };
-  
+
   environment.variables = {
     # QT_SCALE_FACTOR = "1.25";
     QT_QPA_PLATFORM = "wayland";
@@ -148,14 +147,18 @@ in
     git
     gnome-tweaks
     htop
-    nil
     mosh
+    nh
+    nil
+    nix-output-monitor
+    nixfmt-rfc-style
+    nvd
     oh-my-zsh
     tmux
     vim
-    zsh
-    zoxide
     wl-clipboard
+    zoxide
+    zsh
   ];
 
   users.defaultUserShell = pkgs.zsh;
@@ -166,7 +169,9 @@ in
   };
   programs.zsh = {
     enable = true;
-    # promptInit = "source ${gomer-zsh-theme}/share/zsh/themes/gomer.zsh-theme";
+    # interactiveShellInit = ''
+    #   source ${pkgs.zsh-autocomplete}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+    # '';
     ohMyZsh = {
       enable = true;
       plugins = [
@@ -174,9 +179,21 @@ in
         "git"
         "sudo"
       ];
+      customPkgs = with pkgs; [
+        nix-zsh-completions
+        zsh-autosuggestions
+        zsh-nix-shell
+      ];
     };
-  };    
-  
+    enableCompletion = false;
+    autosuggestions = {
+      enable = true;
+      extraConfig = {
+        "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" = "fg=#939ab7";
+      };
+    };
+  };
+
   environment.variables.TERM = "xterm-direct";
   environment.variables.EDITOR = "emacs";
 
@@ -197,7 +214,7 @@ in
         settings =
           let
             empty = lib.gvariant.mkEmptyArray lib.gvariant.type.string;
-          in 
+          in
             {
               "org/gnome/desktop/wm/keybindings" = {
                 activate-window-menu=empty;
