@@ -112,6 +112,7 @@ in
       claude-code
       cmake
       direnv
+      discord
       emacs-nox
       gnumake
       keepassxc
@@ -147,6 +148,7 @@ in
     git
     gnome-tweaks
     htop
+    jujutsu
     mosh
     nh
     nil
@@ -169,9 +171,7 @@ in
   };
   programs.zsh = {
     enable = true;
-    # interactiveShellInit = ''
-    #   source ${pkgs.zsh-autocomplete}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-    # '';
+
     ohMyZsh = {
       enable = true;
       plugins = [
@@ -189,7 +189,7 @@ in
     autosuggestions = {
       enable = true;
       extraConfig = {
-        "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" = "fg=#939ab7";
+        "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" = "fg=#5b6078";
       };
     };
   };
