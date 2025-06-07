@@ -24,6 +24,7 @@ in
   environment.variables = {
     # QT_SCALE_FACTOR = "1.25";
     QT_QPA_PLATFORM = "wayland";
+    GDK_BACKEND = "wayland";
   };
 
   # There is an input lag when working in emacs. This is in attempted to improve it
@@ -144,6 +145,7 @@ in
     aspellDicts.en-computers
     aspellDicts.en-science
     bat
+    fzf
     ghostty
     git
     gnome-tweaks
@@ -169,19 +171,26 @@ in
   environment.sessionVariables = {
     PATH="$HOME/bin:$PATH";
   };
+
   programs.zsh = {
     enable = true;
+
+    interactiveShellInit = ''
+      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    '';
 
     ohMyZsh = {
       enable = true;
       plugins = [
         "direnv"
+        "fzf"
         "git"
         "sudo"
       ];
       customPkgs = with pkgs; [
         nix-zsh-completions
         zsh-autosuggestions
+        zsh-syntax-highlighting
         zsh-nix-shell
       ];
     };
@@ -192,6 +201,11 @@ in
         "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" = "fg=#5b6078";
       };
     };
+  };
+
+  programs.fzf = {
+    keybindings = true;
+    fuzzyCompletion = true;
   };
 
   environment.variables.TERM = "xterm-direct";
@@ -262,6 +276,7 @@ in
   programs.mosh.enable = true;
 
   networking.firewall = {
+    allowedTCPPorts = [ 22 5173 ];
     allowedUDPPortRanges = [
       { from = 60000; to = 61000; } # Default mosh port range
     ];
