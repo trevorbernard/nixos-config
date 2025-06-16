@@ -20,7 +20,7 @@ in
     GDK_SCALE = "1";
     GDK_DPI_SCALE = "1";
   };
-
+  
   environment.variables = {
     # QT_SCALE_FACTOR = "1.25";
     QT_QPA_PLATFORM = "wayland";
@@ -115,6 +115,7 @@ in
       direnv
       discord
       emacs-nox
+      eza
       gnumake
       keepassxc
       jq
@@ -144,6 +145,7 @@ in
     aspellDicts.en
     aspellDicts.en-computers
     aspellDicts.en-science
+    atuin
     bat
     fzf
     ghostty
@@ -161,6 +163,7 @@ in
     tmux
     vim
     wl-clipboard
+    magic-wormhole
     zoxide
     zsh
   ];
@@ -201,8 +204,8 @@ in
         "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" = "fg=#5b6078";
       };
     };
-  };
-
+  };    
+  
   programs.fzf = {
     keybindings = true;
     fuzzyCompletion = true;
@@ -228,7 +231,7 @@ in
         settings =
           let
             empty = lib.gvariant.mkEmptyArray lib.gvariant.type.string;
-          in
+          in 
             {
               "org/gnome/desktop/wm/keybindings" = {
                 activate-window-menu=empty;
