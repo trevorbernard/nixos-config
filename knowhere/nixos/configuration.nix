@@ -20,7 +20,7 @@ in
     GDK_SCALE = "1";
     GDK_DPI_SCALE = "1";
   };
-  
+
   environment.variables = {
     # QT_SCALE_FACTOR = "1.25";
     QT_QPA_PLATFORM = "wayland";
@@ -108,27 +108,19 @@ in
     packages = with pkgs; [
       adw-gtk3
       brave
-      chezmoi
       clang
       claude-code
       cmake
       direnv
       discord
       emacs-nox
-      eza
-      gnumake
       keepassxc
-      jq
-      libtool
-      libvterm
       ninja
       nix-direnv
-      ripgrep
       signal-desktop
       slack
       starship
       stow
-      tig
     ];
   };
 
@@ -147,12 +139,18 @@ in
     aspellDicts.en-science
     atuin
     bat
+    eza
     fzf
     ghostty
     git
     gnome-tweaks
+    gnumake
     htop
+    jq
     jujutsu
+    libtool
+    libvterm
+    magic-wormhole
     mosh
     nh
     nil
@@ -160,10 +158,11 @@ in
     nixfmt-rfc-style
     nvd
     oh-my-zsh
+    ripgrep
+    tig
     tmux
     vim
     wl-clipboard
-    magic-wormhole
     zoxide
     zsh
   ];
@@ -204,8 +203,8 @@ in
         "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" = "fg=#5b6078";
       };
     };
-  };    
-  
+  };
+
   programs.fzf = {
     keybindings = true;
     fuzzyCompletion = true;
@@ -231,7 +230,7 @@ in
         settings =
           let
             empty = lib.gvariant.mkEmptyArray lib.gvariant.type.string;
-          in 
+          in
             {
               "org/gnome/desktop/wm/keybindings" = {
                 activate-window-menu=empty;
