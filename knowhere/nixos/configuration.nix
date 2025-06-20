@@ -83,7 +83,7 @@ in
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -125,6 +125,18 @@ in
       stow
     ];
   };
+
+  security.sudo.extraRules = [
+    {
+      users = [ "tbernard" ];
+      commands = [
+        {
+          command = "ALL";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
 
   environment.variables.COLORTERM = "truecolor";
 
@@ -217,7 +229,7 @@ in
 
   fonts.packages = with pkgs; [
     fira-code
-    fira-code-nerdfont
+    nerd-fonts.fira-code
     fira-code-symbols
     jetbrains-mono
   ];
