@@ -62,6 +62,8 @@ in
   networking.hostName = "knowhere"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  virtualisation.docker.enable = true;
+
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -101,7 +103,7 @@ in
     isNormalUser = true;
     shell = pkgs.zsh;
     description = "Trevor Bernard";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILXxbj3QvMLNgvuXvt6xHZKb0Jq/Czy71ROzer2UBNB8 trevor.bernard@gmail.com"
     ];
@@ -217,6 +219,7 @@ in
     fira-code
     fira-code-nerdfont
     fira-code-symbols
+    jetbrains-mono
   ];
 
   # Enable Emacs keybindings in GNOME
