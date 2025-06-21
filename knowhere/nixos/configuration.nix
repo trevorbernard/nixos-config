@@ -109,6 +109,9 @@ in
     ];
     packages = with pkgs; [
       adw-gtk3
+      amazon-q-cli
+      aws-sam-cli
+      awscli2
       brave
       clang
       claude-code
