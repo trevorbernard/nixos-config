@@ -118,7 +118,6 @@ in
       cmake
       direnv
       discord
-      emacs-nox
       keepassxc
       ninja
       nix-direnv
@@ -156,6 +155,7 @@ in
     aspellDicts.en-science
     atuin
     bat
+    emacs-nox
     eza
     fzf
     ghostty
