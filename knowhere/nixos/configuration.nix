@@ -180,6 +180,7 @@ in
     tmux
     vim
     wl-clipboard
+    yq
     zoxide
     zsh
   ];
