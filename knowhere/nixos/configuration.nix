@@ -178,9 +178,11 @@ in
     ripgrep
     tig
     tmux
+    unzip
     vim
     wl-clipboard
     yq
+    zip
     zoxide
     zsh
   ];
