@@ -129,6 +129,8 @@ in
     ];
   };
 
+  services.tailscale.enable = true;
+
   security.sudo.extraRules = [
     {
       users = [ "tbernard" ];
