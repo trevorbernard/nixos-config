@@ -125,6 +125,7 @@ in
       slack
       starship
       stow
+      tailscale
     ];
   };
 
@@ -297,6 +298,11 @@ in
       PermitRootLogin = "no";
     };
   };
+
+  services.logind.extraConfig = ''
+    IdleAction=ignore
+    IdleActionSec=0
+  '';
 
   programs.mosh.enable = true;
 
