@@ -2,6 +2,14 @@
 
 let
   claude-code = pkgs.callPackage ./nix/claude-code/default.nix {};
+  termcopy = pkgs.callPackage (pkgs.fetchFromGitHub {
+    owner = "trevorbernard";
+    repo = "termcopy";
+    rev = "main";
+    sha256 = "sha256-0PWmSJqyKGa9ZNCZHHNjUm4auoV9EyRylshjijQ5Cc8=";
+  } + "/default.nix") {
+    rustToolchain = pkgs.rust-bin.stable.latest.default;
+  };
 in
 {
   imports =
@@ -10,6 +18,9 @@ in
       ./hardware/truerng.nix
     ];
 
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball "https://github.com/oxalica/rust-overlay/archive/master.tar.gz"))
+  ];
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
@@ -126,6 +137,7 @@ in
       starship
       stow
       tailscale
+      termcopy
     ];
   };
 
