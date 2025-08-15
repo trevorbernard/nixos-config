@@ -6,10 +6,9 @@ let
     owner = "trevorbernard";
     repo = "termcopy";
     rev = "main";
-    sha256 = "sha256-0PWmSJqyKGa9ZNCZHHNjUm4auoV9EyRylshjijQ5Cc8=";
-  } + "/default.nix") {
-    rustToolchain = pkgs.rust-bin.stable.latest.default;
-  };
+    # sha256 = lib.fakeHash;
+    sha256 = "sha256-Y10/EfQdylzhhXFqxF/sO0xA4RxGEEX3C2zkvG1pMM8=";
+  } + "/default.nix") { };
 in
 {
   imports =
@@ -18,9 +17,6 @@ in
       ./hardware/truerng.nix
     ];
 
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball "https://github.com/oxalica/rust-overlay/archive/master.tar.gz"))
-  ];
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
