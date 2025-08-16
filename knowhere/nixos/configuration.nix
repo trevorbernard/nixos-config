@@ -5,9 +5,9 @@ let
   termcopy = pkgs.callPackage (pkgs.fetchFromGitHub {
     owner = "trevorbernard";
     repo = "termcopy";
-    rev = "main";
+    rev = "v0.1.0";
     # sha256 = lib.fakeHash;
-    sha256 = "sha256-Y10/EfQdylzhhXFqxF/sO0xA4RxGEEX3C2zkvG1pMM8=";
+    sha256 = "sha256-P6Nk6uOG9xC9HhIfdjQ+A4E2GbrQicdC+a/wwJ++6sA=";
   } + "/default.nix") { };
 in
 {
