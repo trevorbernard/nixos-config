@@ -125,6 +125,7 @@ in
       cmake
       direnv
       discord
+      gh
       keepassxc
       ninja
       nix-direnv
