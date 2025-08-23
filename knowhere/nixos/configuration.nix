@@ -318,7 +318,7 @@ in
   programs.mosh.enable = true;
 
   networking.firewall = {
-    allowedTCPPorts = [ 22 5173 ];
+    allowedTCPPorts = [ 22 5173 5432 ];
     allowedUDPPortRanges = [
       { from = 60000; to = 61000; } # Default mosh port range
     ];
