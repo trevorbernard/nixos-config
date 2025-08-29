@@ -2,6 +2,7 @@
 
 let
   claude-code = pkgs.callPackage ./nix/claude-code/default.nix {};
+  emacs-nox = pkgs.callPackage ./nix/emacs30/default.nix {};
   termcopy = pkgs.callPackage (pkgs.fetchFromGitHub {
     owner = "trevorbernard";
     repo = "termcopy";
