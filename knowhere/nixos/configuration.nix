@@ -187,7 +187,6 @@ in
     nix-output-monitor
     nixfmt-rfc-style
     nvd
-    oh-my-zsh
     ripgrep
     tig
     tmux
@@ -209,35 +208,6 @@ in
 
   programs.zsh = {
     enable = true;
-
-    interactiveShellInit = ''
-      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    '';
-
-    ohMyZsh = {
-      enable = true;
-      plugins = [
-        "direnv"
-        "fzf"
-        "git"
-        "sudo"
-      ];
-      customPkgs = with pkgs; [
-        nix-zsh-completions
-        zsh-autosuggestions
-        zsh-syntax-highlighting
-        zsh-nix-shell
-      ];
-    };
-    enableCompletion = false;
-    autosuggestions = {
-      enable = true;
-      extraConfig = {
-        "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" = "fg=#5b6078";
-        "ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE" = "20";
-        "ZSH_AUTOSUGGEST_USE_ASYNC" = "1";
-      };
-    };
   };
 
   programs.fzf = {
