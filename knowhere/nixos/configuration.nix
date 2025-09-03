@@ -10,6 +10,7 @@ in
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./hardware/truerng.nix
+      ./buildkite/buildkite.nix
     ];
 
   # Bootloader.
