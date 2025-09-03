@@ -3,13 +3,7 @@
 let
   claude-code = pkgs.callPackage ./nix/claude-code/default.nix {};
   emacs-nox = pkgs.callPackage ./nix/emacs30/default.nix {};
-  termcopy = pkgs.callPackage (pkgs.fetchFromGitHub {
-    owner = "trevorbernard";
-    repo = "termcopy";
-    rev = "v0.1.0";
-    # sha256 = lib.fakeHash;
-    sha256 = "sha256-P6Nk6uOG9xC9HhIfdjQ+A4E2GbrQicdC+a/wwJ++6sA=";
-  } + "/default.nix") { };
+  termcopy = pkgs.callPackage ./nix/termcopy/default.nix {};
 in
 {
   imports =
