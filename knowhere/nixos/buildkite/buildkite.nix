@@ -46,7 +46,7 @@ in
       name="knowhere-agent-%spawn"
       spawn=2
       priority=50
-      tags="production=false,nix=true,docker=true,os-kernel=linux,os-family=nixos,os-variant=nixos,xwindows=false"
+      tags="production=false,nix=true,docker=true,os-kernel=linux,os-family=nixos,os-variant=nixos,xwindows=true"
       build-path="$HOME/builds"
       hooks-path="${hooksPath}"
       EOF

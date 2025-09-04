@@ -168,6 +168,7 @@ in
     fzf
     ghostty
     git
+    git-filter-repo
     gnome-tweaks
     gnumake
     htop
