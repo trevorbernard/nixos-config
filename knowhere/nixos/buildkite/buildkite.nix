@@ -22,7 +22,7 @@ let
     ln -s ${buildkitePreBootstrap} $out/pre-bootstrap
 
     cat > $out/pre-checkout << EOF
-    BUILDKITE_GIT_CLEAN_FLAGS='-ffdx --exclude=rust/.cargo'
+    BUILDKITE_GIT_CLEAN_FLAGS='-ffdx'
     export BUILDKITE_GIT_CLEAN_FLAGS
     EOF
   '';
@@ -44,9 +44,9 @@ in
       set -u
       cat > "$HOME/buildkite-agent.cfg" <<EOF
       name="knowhere-agent-%spawn"
-      spawn=2
+      spawn=5
       priority=50
-      tags="production=false,nix=true,docker=true,os-kernel=linux,os-family=nixos,os-variant=nixos,xwindows=true"
+      tags="production=false,nix=true,docker=true,os-kernel=linux,os-family=nixos,os-variant=nixos,xwindows=false"
       build-path="$HOME/builds"
       hooks-path="${hooksPath}"
       EOF
