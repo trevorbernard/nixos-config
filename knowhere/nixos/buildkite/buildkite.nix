@@ -48,6 +48,7 @@ in
       priority=50
       tags="production=false,nix=true,docker=true,os-kernel=linux,os-family=nixos,os-variant=nixos,xwindows=false"
       build-path="$HOME/builds"
+      plugins-path="$HOME/plugins"
       hooks-path="${hooksPath}"
       EOF
     '';
