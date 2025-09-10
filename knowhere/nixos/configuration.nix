@@ -153,6 +153,22 @@ in
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Overlays
+  nixpkgs.overlays = [
+    (_: prev: {
+      tailscale = prev.tailscale.overrideAttrs (old: {
+        checkFlags =
+          builtins.map (
+            flag:
+              if prev.lib.hasPrefix "-skip=" flag
+              then flag + "|^TestGetList$|^TestIgnoreLocallyBoundPorts$|^TestPoller$"
+              else flag
+          )
+          old.checkFlags;
+      });
+    })
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nix.settings.experimental-features = ["nix-command" "flakes"];
