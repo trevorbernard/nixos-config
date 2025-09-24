@@ -166,6 +166,11 @@ in
           old.checkFlags;
       });
     })
+    (_: prev: {
+      ghostty = (import (builtins.fetchTarball {
+        url = "https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz";
+      }) { system = prev.system; }).ghostty;
+    })
   ];
 
   # List packages installed in system profile. To search, run:
