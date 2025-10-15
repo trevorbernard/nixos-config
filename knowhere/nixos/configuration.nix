@@ -155,18 +155,6 @@ in
   # Overlays
   nixpkgs.overlays = [
     (_: prev: {
-      tailscale = prev.tailscale.overrideAttrs (old: {
-        checkFlags =
-          builtins.map (
-            flag:
-              if prev.lib.hasPrefix "-skip=" flag
-              then flag + "|^TestGetList$|^TestIgnoreLocallyBoundPorts$|^TestPoller$"
-              else flag
-          )
-          old.checkFlags;
-      });
-    })
-    (_: prev: {
       ghostty = (import (builtins.fetchTarball {
         url = "https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz";
       }) { system = prev.system; }).ghostty;
