@@ -37,7 +37,7 @@ nix flake update
 Update specific input:
 ```bash
 nix flake update nixpkgs
-nix flake update nixpkgs-unstable
+nix flake update ghostty
 ```
 
 ## Verifying Configuration
@@ -74,4 +74,4 @@ nix flake metadata
 This configuration includes custom packages via overlays:
 - **claude-code** - AI coding assistant
 - **termcopy** - Terminal clipboard utility
-- **ghostty** - Terminal emulator from nixpkgs-unstable
+- **ghostty** - Terminal emulator from upstream flake
