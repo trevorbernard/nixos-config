@@ -1,9 +1,5 @@
 { config, pkgs, lib, ... }:
 
-let
-  claude-code = pkgs.callPackage ./nix/claude-code/default.nix {};
-  termcopy = pkgs.callPackage ./nix/termcopy/default.nix {};
-in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -151,15 +147,6 @@ in
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # Overlays
-  nixpkgs.overlays = [
-    (_: prev: {
-      ghostty = (import (builtins.fetchTarball {
-        url = "https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz";
-      }) { system = prev.system; }).ghostty;
-    })
-  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
