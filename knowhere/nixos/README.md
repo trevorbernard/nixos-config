@@ -40,6 +40,32 @@ nix flake update nixpkgs
 nix flake update ghostty
 ```
 
+### Updating Ghostty to a New Release
+
+Ghostty is pinned to a specific version tag (currently `v1.2.1`) in `flake.nix`. To update to a new release:
+
+1. Check available releases at https://github.com/ghostty-org/ghostty/releases
+
+2. Update the version in `flake.nix`:
+```nix
+ghostty.url = "github:ghostty-org/ghostty/v1.3.0";  # Change to desired version
+```
+
+3. Update the lock file:
+```bash
+nix flake update ghostty
+```
+
+4. Verify the configuration:
+```bash
+nix flake check
+```
+
+5. Rebuild to use the new version:
+```bash
+sudo nixos-rebuild switch --flake .#knowhere
+```
+
 ## Verifying Configuration
 
 Check flake configuration validity:
