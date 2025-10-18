@@ -99,10 +99,27 @@
         "type": "github"
       }
     },
+    "nixpkgs_4": {
+      "locked": {
+        "lastModified": 1755152343,
+        "narHash": "sha256-6NhwGvii7Fh54oSg08iREp2LouDIpy9cZr2DHpbpzaA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "20a42bc21e54ac69d390af482945da2ed0f818c4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.05-small",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "ghostty": "ghostty",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_3",
+        "termcopy": "termcopy"
       }
     },
     "systems": {
@@ -117,6 +134,24 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "termcopy": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_4"
+      },
+      "locked": {
+        "lastModified": 1755378040,
+        "narHash": "sha256-htbb8oyMXJeN1gxcf77GmKfl12jFGXymwiazndsOAvc=",
+        "owner": "trevorbernard",
+        "repo": "termcopy",
+        "rev": "b49baca915137fdb295e7c8baab1ad1ff99513d3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "trevorbernard",
+        "repo": "termcopy",
         "type": "github"
       }
     },

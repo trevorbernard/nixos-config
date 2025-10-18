@@ -4,9 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     ghostty.url = "github:ghostty-org/ghostty/v1.2.2";
+    termcopy.url = "github:trevorbernard/termcopy";
   };
 
-  outputs = { self, nixpkgs, ghostty, ... }:
+  outputs = { self, nixpkgs, ghostty, termcopy, ... }:
     let
       system = "x86_64-linux";
     in
@@ -23,7 +24,7 @@
               # Custom packages overlay
               (final: prev: {
                 claude-code = prev.callPackage ./nix/claude-code/default.nix {};
-                termcopy = prev.callPackage ./nix/termcopy/default.nix {};
+                termcopy = termcopy.packages.${system}.default;
                 ghostty = ghostty.packages.${system}.default;
               })
             ];
