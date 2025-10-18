@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    ghostty.url = "github:ghostty-org/ghostty/v1.2.1";
+    ghostty.url = "github:ghostty-org/ghostty/v1.2.2";
   };
 
   outputs = { self, nixpkgs, ghostty, ... }:
