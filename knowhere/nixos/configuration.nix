@@ -126,6 +126,7 @@
       stow
       tailscale
       termcopy
+      tree
     ];
   };
 
