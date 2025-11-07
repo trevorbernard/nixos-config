@@ -104,6 +104,7 @@
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILXxbj3QvMLNgvuXvt6xHZKb0Jq/Czy71ROzer2UBNB8 trevor.bernard@gmail.com"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINGrvzXeZ4upwcTK3K99XeGB0gbQSz+e2loo4iykSSRR tbernard@aypa.com"
     ];
     packages = with pkgs; [
       adw-gtk3
