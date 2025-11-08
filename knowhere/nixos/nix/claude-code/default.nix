@@ -6,14 +6,14 @@
 
 buildNpmPackage rec {
   pname = "claude-code";
-  version = "2.0.32";
+  version = "2.0.36";
 
   src = fetchzip {
     url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${version}.tgz";
-    hash = "sha256-w8auh/tivUF4ZxbZ5BRJcym0wPYDaYhCP33mHbjPo/c=";
+    hash = "sha256-6tbbCaF1HIgdk1vpbgQnBKWghaKKphGIGZoXtmnhY2I=";
   };
 
-  npmDepsHash = "sha256-bujAaC6fvH1I3TzAEi8t/+H4w4W7KEVyj3GwTAxcvPo=";
+  npmDepsHash = "sha256-H9g4XE5niSWI+Wj4MTuoTk/gTDieVpYXSF3j7zOVPbE=";
 
   postPatch = ''
     cp ${./package-lock.json} package-lock.json
