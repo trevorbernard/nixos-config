@@ -1,0 +1,84 @@
+{
+  "nodes": {
+    "nix-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1759509947,
+        "narHash": "sha256-4XifSIHfpJKcCf5bZZRhj8C4aCpjNBaE3kXr02s4rHU=",
+        "owner": "nix-darwin",
+        "repo": "nix-darwin",
+        "rev": "000eadb231812ad6ea6aebd7526974aaf4e79355",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-darwin",
+        "ref": "nix-darwin-25.05",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1762144065,
+        "narHash": "sha256-k3NSnkbPvyuP/w+OVo/RgmWndk6B4nqVikNnXnFXDIc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "f1c4af35610755eafb720229a7e63214cbc9784c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-25.05-darwin",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1755152343,
+        "narHash": "sha256-6NhwGvii7Fh54oSg08iREp2LouDIpy9cZr2DHpbpzaA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "20a42bc21e54ac69d390af482945da2ed0f818c4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.05-small",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nix-darwin": "nix-darwin",
+        "nixpkgs": "nixpkgs",
+        "termcopy": "termcopy"
+      }
+    },
+    "termcopy": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1755378040,
+        "narHash": "sha256-htbb8oyMXJeN1gxcf77GmKfl12jFGXymwiazndsOAvc=",
+        "owner": "trevorbernard",
+        "repo": "termcopy",
+        "rev": "b49baca915137fdb295e7c8baab1ad1ff99513d3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "trevorbernard",
+        "repo": "termcopy",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
