@@ -57,6 +57,7 @@
       homebrew = {
         enable = true;
         casks  = [
+          "claude"
           "1password"
           "spotify"
           "brave-browser"
