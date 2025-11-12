@@ -67,6 +67,7 @@
           "1password"
           "spotify"
           "brave-browser"
+          "ghostty"
         ];
         brews = [
           "gnupg"
