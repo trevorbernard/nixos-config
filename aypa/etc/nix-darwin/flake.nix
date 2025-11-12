@@ -35,13 +35,13 @@
             nil
             nix-direnv
             starship
-            termcopy
             tig
             tmux
             zoxide
           ])
         ++ [
           claude-code.packages.${system}.default
+          termcopy.packages.${system}.default
         ];
 
       # Necessary for using flakes on this system.
