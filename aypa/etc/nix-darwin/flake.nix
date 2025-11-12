@@ -6,36 +6,42 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     termcopy.url = "github:trevorbernard/termcopy";
+    claude-code.url = "path:../../../nix-common/claude-code";
   };
 
-  outputs = { self, nix-darwin, nixpkgs, termcopy, ... }:
+  outputs = { self, nix-darwin, nixpkgs, termcopy, claude-code, ... }:
   let
+    system = "aarch64-darwin";
     configuration = { pkgs, ... }: {
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
-      environment.systemPackages = with pkgs;
-        [
-          (aspellWithDicts (dicts: with dicts; [ en en-computers]))
-          atuin
-          clang
-          cmake
-          direnv
-          (emacs-nox.override {
-            withNativeCompilation = true;
-          })
-          eza
-          fzf
-          git
-          htop
-          libtool
-          neovim
-          nil
-          nix-direnv
-          starship
-          termcopy
-          tig
-          tmux
-          zoxide
+      environment.systemPackages =
+        (with pkgs;
+          [
+            (aspellWithDicts (dicts: with dicts; [ en en-computers]))
+            atuin
+            clang
+            cmake
+            direnv
+            (emacs-nox.override {
+              withNativeCompilation = true;
+            })
+            eza
+            fzf
+            git
+            htop
+            libtool
+            neovim
+            nil
+            nix-direnv
+            starship
+            termcopy
+            tig
+            tmux
+            zoxide
+          ])
+        ++ [
+          claude-code.packages.${system}.default
         ];
 
       # Necessary for using flakes on this system.

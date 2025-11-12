@@ -1,5 +1,19 @@
 {
   "nodes": {
+    "claude-code": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "path": "../../../nix-common/claude-code",
+        "type": "path"
+      },
+      "original": {
+        "path": "../../../nix-common/claude-code",
+        "type": "path"
+      },
+      "parent": []
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -23,6 +37,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1762765860,
+        "narHash": "sha256-eC9lOOs9XIbyXStB1DZ+9CNNNsLRmCktrIRCBlxuMWo=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "37a52ecc83b26df6447531b1629d2f49b6107834",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.05-small",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1762144065,
         "narHash": "sha256-k3NSnkbPvyuP/w+OVo/RgmWndk6B4nqVikNnXnFXDIc=",
         "owner": "NixOS",
@@ -37,7 +67,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1755152343,
         "narHash": "sha256-6NhwGvii7Fh54oSg08iREp2LouDIpy9cZr2DHpbpzaA=",
@@ -55,14 +85,15 @@
     },
     "root": {
       "inputs": {
+        "claude-code": "claude-code",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "termcopy": "termcopy"
       }
     },
     "termcopy": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1755378040,
