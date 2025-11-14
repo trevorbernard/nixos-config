@@ -63,11 +63,12 @@
       homebrew = {
         enable = true;
         casks  = [
-          "claude"
           "1password"
-          "spotify"
           "brave-browser"
+          "claude"
           "ghostty"
+          "snowflake-snowsql"
+          "spotify"
         ];
         brews = [
           "gnupg"
