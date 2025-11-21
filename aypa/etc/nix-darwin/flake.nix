@@ -62,11 +62,15 @@
 
       homebrew = {
         enable = true;
+        taps = [
+          "snowflakedb/snowflake-cli"
+        ];
         casks  = [
           "1password"
           "brave-browser"
           "claude"
           "ghostty"
+          "snowflake-cli"
           "snowflake-snowsql"
           "spotify"
         ];
