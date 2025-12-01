@@ -2,7 +2,7 @@
   description = "NixOS configuration for knowhere";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     ghostty.url = "github:ghostty-org/ghostty/v1.2.3";
     termcopy.url = "github:trevorbernard/termcopy";
   };

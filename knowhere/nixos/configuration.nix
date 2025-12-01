@@ -109,7 +109,6 @@
     packages = with pkgs; [
       adw-gtk3
       amazon-q-cli
-      aws-sam-cli
       awscli2
       brave
       clang
@@ -274,10 +273,10 @@
     };
   };
 
-  services.logind.extraConfig = ''
-    IdleAction=ignore
-    IdleActionSec=0
-  '';
+  services.logind.settings.Login = {
+    IdleAction = "ignore";
+    IdleActionSec = 0;
+  };
 
   programs.mosh.enable = true;
 
