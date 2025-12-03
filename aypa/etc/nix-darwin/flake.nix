@@ -27,6 +27,7 @@
             eza
             fzf
             git
+            gh
             htop
             libtool
             neovim
