@@ -121,7 +121,6 @@
       ninja
       nix-direnv
       signal-desktop
-      slack
       starship
       stow
       tailscale
