@@ -24,8 +24,8 @@
     QT_QPA_PLATFORM = "wayland";
     GDK_BACKEND = "wayland";
   };
-
   # There is an input lag when working in emacs. This is in attempted to improve it
+  i18n.inputMethod.enable = false;
   environment.variables = {
     GTK_IM_MODULE = "none";
   };
