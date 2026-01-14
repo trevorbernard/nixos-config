@@ -1,4 +1,6 @@
 {
+  description = "nix-darwin configuration for aypa (macOS)";
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
@@ -7,64 +9,71 @@
     claude-code.url = "path:../../../nix-common/claude-code";
   };
 
-  outputs = { self, nix-darwin, nixpkgs, termcopy, claude-code, ... }:
-  let
+  outputs = {
+    self,
+    nix-darwin,
+    nixpkgs,
+    termcopy,
+    claude-code,
+    ...
+  }: let
     system = "aarch64-darwin";
-    configuration = { pkgs, ... }: {
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
+
+    configuration = {pkgs, ...}: {
+      # Packages
       environment.systemPackages =
-        (with pkgs;
-          [
-            (aspellWithDicts (dicts: with dicts; [ en en-computers]))
-            atuin
-            clang
-            cmake
-            direnv
-            (emacs-nox.override {
-              withNativeCompilation = true;
-            })
-            eza
-            fzf
-            git
-            gh
-            htop
-            libtool
-            neovim
-            nil
-            nix-direnv
-            starship
-            tig
-            tmux
-            zoxide
-          ])
+        (with pkgs; [
+          # Development tools
+          clang
+          cmake
+          git
+          gh
+          libtool
+
+          # Editors
+          (emacs-nox.override {withNativeCompilation = true;})
+          neovim
+
+          # Shell utilities
+          atuin
+          direnv
+          eza
+          fzf
+          starship
+          zoxide
+
+          # Nix tooling
+          nil
+          nix-direnv
+
+          # Other
+          (aspellWithDicts (dicts: with dicts; [en en-computers]))
+          htop
+          tig
+          tmux
+        ])
         ++ [
+          # External inputs
           claude-code.packages.${system}.default
           termcopy.packages.${system}.default
         ];
 
-      # Necessary for using flakes on this system.
+      # Nix settings
       nix.settings.experimental-features = "nix-command flakes";
 
-      # Enable alternative shell support in nix-darwin.
-      # programs.fish.enable = true;
-
-      # Set Git commit hash for darwin-version.
+      # System metadata
       system.configurationRevision = self.rev or self.dirtyRev or null;
-
-      # Used for backwards compatibility, please read the changelog before changing.
       # $ darwin-rebuild changelog
       system.stateVersion = 6;
-
-      # The platform the configuration will be used on.
       nixpkgs.hostPlatform = system;
 
+      # Homebrew (GUI apps and packages not in nixpkgs)
       homebrew = {
         enable = true;
         taps = [
           "snowflakedb/snowflake-cli"
         ];
-        casks  = [
+        casks = [
           "1password"
           "brave-browser"
           "claude"
@@ -78,21 +87,19 @@
         ];
       };
 
-      # The user should already exist, but we need to set this up so Nix knows
-      # what our home directory is (https://github.com/LnL7/nix-darwin/issues/423).
+      # User configuration
+      # Needed so nix-darwin knows home directory (https://github.com/LnL7/nix-darwin/issues/423)
       users.users.tbernard = {
         home = "/Users/tbernard";
         shell = pkgs.zsh;
       };
-      # Required for some settings like homebrew to know what user to apply to.
       system.primaryUser = "tbernard";
     };
-  in
-  {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#aypa
+  in {
     darwinConfigurations."aypa" = nix-darwin.lib.darwinSystem {
-      modules = [ configuration ];
+      modules = [configuration];
     };
+
+    formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
   };
 }
