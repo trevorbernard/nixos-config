@@ -35,13 +35,15 @@
   services.xserver = {
     enable = true;
     dpi = 144;
-    displayManager.gdm = {
-      enable = true;
-      wayland = true;
-    };
-    desktopManager.gnome.enable = true;
     videoDrivers = [ "nvidia" ];
   };
+
+  services.displayManager.gdm = {
+    enable = true;
+    wayland = true;
+  };
+
+  services.desktopManager.gnome.enable = true;
 
   # enable OpenGL
   hardware.graphics = {
@@ -241,7 +243,7 @@
   programs.gnome-terminal.enable = true;
 
   # Set GTK applications to use Emacs key bindings
-  services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+  services.desktopManager.gnome.extraGSettingsOverrides = ''
     [org.gnome.desktop.interface]
     gtk-key-theme='Emacs'
   '';
@@ -276,6 +278,11 @@
     IdleAction = "ignore";
     IdleActionSec = 0;
   };
+
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
 
   programs.mosh.enable = true;
 
