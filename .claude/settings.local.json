@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(git -C /Users/tbernard/code/nixos-config config --list)",
-      "Bash(git -C /Users/tbernard/code/nixos-config log --all --graph --oneline)"
-    ]
-  }
-}
