@@ -18,6 +18,8 @@
     ...
   }: let
     system = "aarch64-darwin";
+    supportedSystems = ["aarch64-darwin"];
+    forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
 
     configuration = {pkgs, ...}: {
       # Packages
@@ -79,7 +81,6 @@
           "claude"
           "ghostty"
           "snowflake-cli"
-          "snowflake-snowsql"
           "spotify"
         ];
         brews = [
@@ -100,6 +101,6 @@
       modules = [configuration];
     };
 
-    formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
   };
 }
