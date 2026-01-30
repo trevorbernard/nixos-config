@@ -6,7 +6,7 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     termcopy.url = "github:trevorbernard/termcopy";
-    claude-code.url = "path:../../../nix-common/claude-code";
+    claude-code-overlay.url = "github:ryoppippi/claude-code-overlay";
   };
 
   outputs = {
@@ -14,14 +14,16 @@
     nix-darwin,
     nixpkgs,
     termcopy,
-    claude-code,
+    claude-code-overlay,
     ...
   }: let
     system = "aarch64-darwin";
     supportedSystems = ["aarch64-darwin"];
     forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
 
-    configuration = {pkgs, ...}: {
+    configuration = {pkgs, lib, ...}: {
+      nixpkgs.overlays = [claude-code-overlay.overlays.default];
+      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["claude-code"];
       # Packages
       environment.systemPackages =
         (with pkgs; [
@@ -56,12 +58,16 @@
         ])
         ++ [
           # External inputs
-          claude-code.packages.${system}.default
+          pkgs.claude-code
           termcopy.packages.${system}.default
         ];
 
       # Nix settings
-      nix.settings.experimental-features = "nix-command flakes";
+      nix.settings = {
+        experimental-features = "nix-command flakes";
+        extra-substituters = ["https://ryoppippi.cachix.org"];
+        extra-trusted-public-keys = ["ryoppippi.cachix.org-1:b2LbtWNvJeL/qb1B6TYOMK+apaCps4SCbzlPRfSQIms="];
+      };
 
       # System metadata
       system.configurationRevision = self.rev or self.dirtyRev or null;

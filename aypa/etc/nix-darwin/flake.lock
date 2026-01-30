@@ -1,18 +1,22 @@
 {
   "nodes": {
-    "claude-code": {
+    "claude-code-overlay": {
       "inputs": {
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "path": "../../../nix-common/claude-code",
-        "type": "path"
+        "lastModified": 1769724178,
+        "narHash": "sha256-A5sXISWz+tPKHquSQGZlsiX5cz3sPI3627apFHwz/o8=",
+        "owner": "ryoppippi",
+        "repo": "claude-code-overlay",
+        "rev": "e7a489f9bebfbe704c87253baa7b2204f814588d",
+        "type": "github"
       },
       "original": {
-        "path": "../../../nix-common/claude-code",
-        "type": "path"
-      },
-      "parent": []
+        "owner": "ryoppippi",
+        "repo": "claude-code-overlay",
+        "type": "github"
+      }
     },
     "nix-darwin": {
       "inputs": {
@@ -37,16 +41,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1762765860,
-        "narHash": "sha256-eC9lOOs9XIbyXStB1DZ+9CNNNsLRmCktrIRCBlxuMWo=",
+        "lastModified": 1768127708,
+        "narHash": "sha256-1Sm77VfZh3mU0F5OqKABNLWxOuDeHIlcFjsXeeiPazs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "37a52ecc83b26df6447531b1629d2f49b6107834",
+        "rev": "ffbc9f8cbaacfb331b6017d5a5abb21a492c9a38",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-25.05-small",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -85,7 +89,7 @@
     },
     "root": {
       "inputs": {
-        "claude-code": "claude-code",
+        "claude-code-overlay": "claude-code-overlay",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs_2",
         "termcopy": "termcopy"
