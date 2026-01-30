@@ -42,7 +42,7 @@ nix flake update ghostty
 
 ### Updating Ghostty to a New Release
 
-Ghostty is pinned to a specific version tag (currently `v1.2.1`) in `flake.nix`. To update to a new release:
+Ghostty is pinned to a specific version tag (currently `v1.2.3`) in `flake.nix`. To update to a new release:
 
 1. Check available releases at https://github.com/ghostty-org/ghostty/releases
 
@@ -93,11 +93,10 @@ nix flake metadata
 - `buildkite/` - Buildkite agent configuration
 - `nix/` - Custom package definitions
   - `claude-code/` - Claude Code package
-  - `termcopy/` - Termcopy package
 
 ## Custom Packages
 
 This configuration includes custom packages via overlays:
-- **claude-code** - AI coding assistant
-- **termcopy** - Terminal clipboard utility
-- **ghostty** - Terminal emulator from upstream flake
+- **claude-code** - AI coding assistant (local package in `nix/`)
+- **termcopy** - Terminal clipboard utility (external flake)
+- **ghostty** - Terminal emulator (external flake)
