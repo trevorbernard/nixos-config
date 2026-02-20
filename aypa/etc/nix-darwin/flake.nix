@@ -86,6 +86,7 @@
           "brave-browser"
           "claude"
           "ghostty"
+          "session-manager-plugin"
           "snowflake-cli"
           "spotify"
         ];
