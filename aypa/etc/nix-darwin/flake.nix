@@ -23,7 +23,7 @@
 
     configuration = {pkgs, lib, ...}: {
       nixpkgs.overlays = [claude-code-overlay.overlays.default];
-      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["claude-code"];
+      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["claude-code" "1password-cli"];
       # Packages
       environment.systemPackages =
         (with pkgs; [
@@ -51,6 +51,7 @@
           nix-direnv
 
           # Other
+          _1password-cli
           (aspellWithDicts (dicts: with dicts; [en en-computers]))
           htop
           tig
