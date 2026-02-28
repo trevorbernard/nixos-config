@@ -80,6 +80,7 @@
         enable = true;
         taps = [
           "snowflakedb/snowflake-cli"
+          "atlassian-labs/acli"
         ];
         casks = [
           "1password"
@@ -91,6 +92,7 @@
           "spotify"
         ];
         brews = [
+          "atlassian-labs/acli/acli"
           "gnupg"
         ];
       };
