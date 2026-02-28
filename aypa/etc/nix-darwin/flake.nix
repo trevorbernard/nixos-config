@@ -86,6 +86,7 @@
           "1password"
           "brave-browser"
           "claude"
+          "docker"
           "ghostty"
           "session-manager-plugin"
           "snowflake-cli"
