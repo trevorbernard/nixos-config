@@ -17,11 +17,10 @@
     claude-code-overlay,
     ...
   }: let
-    system = "aarch64-darwin";
     supportedSystems = ["aarch64-darwin"];
     forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
 
-    configuration = {pkgs, lib, ...}: {
+    configuration = {pkgs, lib, config, ...}: {
       nixpkgs.overlays = [claude-code-overlay.overlays.default];
       nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["claude-code" "1password-cli"];
       # Packages
@@ -60,7 +59,7 @@
         ++ [
           # External inputs
           pkgs.claude-code
-          termcopy.packages.${system}.default
+          termcopy.packages.${pkgs.stdenv.hostPlatform.system}.default
         ];
 
       # Nix settings
@@ -74,7 +73,7 @@
       system.configurationRevision = self.rev or self.dirtyRev or null;
       # $ darwin-rebuild changelog
       system.stateVersion = 6;
-      nixpkgs.hostPlatform = system;
+      nixpkgs.hostPlatform = "aarch64-darwin";
 
       # Homebrew (GUI apps and packages not in nixpkgs)
       homebrew = {
@@ -87,7 +86,7 @@
           "1password"
           "brave-browser"
           "claude"
-          "docker"
+          "docker-desktop"
           "ghostty"
           "session-manager-plugin"
           "snowflake-cli"
