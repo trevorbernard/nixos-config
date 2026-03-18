@@ -94,6 +94,7 @@
         ];
         brews = [
           "atlassian-labs/acli/acli"
+          "glow"
           "gnupg"
         ];
       };
