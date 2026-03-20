@@ -152,7 +152,11 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+    extra-substituters = ["https://ryoppippi.cachix.org"];
+    extra-trusted-public-keys = ["ryoppippi.cachix.org-1:b2LbtWNvJeL/qb1B6TYOMK+apaCps4SCbzlPRfSQIms="];
+  };
   environment.systemPackages = with pkgs; [
     aspell
     aspellDicts.en
