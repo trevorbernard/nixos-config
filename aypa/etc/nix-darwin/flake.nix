@@ -53,6 +53,7 @@
           _1password-cli
           (aspellWithDicts (dicts: with dicts; [en en-computers]))
           htop
+          mosh
           tig
           tmux
         ])
