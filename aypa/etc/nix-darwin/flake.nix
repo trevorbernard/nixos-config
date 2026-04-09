@@ -89,6 +89,7 @@
           "claude"
           "docker-desktop"
           "ghostty"
+          "obsidian"
           "session-manager-plugin"
           "snowflake-cli"
           "spotify"
