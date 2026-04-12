@@ -65,6 +65,19 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.ensureProfiles.profiles = {
+    "Wired connection 1" = {
+      connection = {
+        id = "Wired connection 1";
+        type = "ethernet";
+        interface-name = "eno1";
+        autoconnect = "true";
+        permissions = "";
+      };
+      ipv4.method = "auto";
+      ipv6.method = "auto";
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "America/Toronto";
