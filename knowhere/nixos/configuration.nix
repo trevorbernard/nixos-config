@@ -302,11 +302,26 @@
 
   programs.mosh.enable = true;
 
+  services.syncthing = {
+    enable = true;
+    user = "tbernard";
+    dataDir = "/home/tbernard";
+    settings.options = {
+      globalAnnounceEnabled = false;
+      localAnnounceEnabled = false;
+      relaysEnabled = false;
+    };
+  };
+
   networking.firewall = {
     allowedTCPPorts = [ 22 5173 5432 ];
     allowedUDPPortRanges = [
       { from = 60000; to = 61000; } # Default mosh port range
     ];
+    interfaces."tailscale0" = {
+      allowedTCPPorts = [ 22000 ];
+      allowedUDPPorts = [ 22000 21027 ];
+    };
   };
 
   # Open ports in the firewall.
