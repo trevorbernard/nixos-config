@@ -306,10 +306,29 @@
     enable = true;
     user = "tbernard";
     dataDir = "/home/tbernard";
-    settings.options = {
-      globalAnnounceEnabled = false;
-      localAnnounceEnabled = false;
-      relaysEnabled = false;
+    settings = {
+      options = {
+        globalAnnounceEnabled = false;
+        localAnnounceEnabled = false;
+        relaysEnabled = false;
+      };
+      devices = {
+        "macbook-pro" = {
+          id = "MD5DF3C-DKWSXWZ-YSJMJ5N-TB2HQWW-L3RYVK2-VIS6JHK-RVHFCHZ-WSA2NQH";
+          addresses = [ "tcp://100.109.146.56:22000" ];
+        };
+        # ipad and iphone entries added once Möbius Sync device IDs are known
+      };
+      folders = {
+        "keepass" = {
+          path = "/home/tbernard/Sync/keepass";
+          devices = [ "macbook-pro" ];
+        };
+        "documents" = {
+          path = "/home/tbernard/Sync/documents";
+          devices = [ "macbook-pro" ];
+        };
+      };
     };
   };
 
