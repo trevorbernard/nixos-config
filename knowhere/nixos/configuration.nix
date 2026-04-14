@@ -119,7 +119,6 @@
       claude-code
       cmake
       direnv
-      discord
       gh
       keepassxc
       ninja
