@@ -130,6 +130,7 @@
       tailscale
       termcopy
       tree
+      tumbler
     ];
   };
 
