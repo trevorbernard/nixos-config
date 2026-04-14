@@ -205,11 +205,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1776200042,
-        "narHash": "sha256-nto3xkS9wRUnn9gYyZpNLiSRnDw+3+iTrg4VVbUkHpY=",
+        "lastModified": 1776206389,
+        "narHash": "sha256-zbaIHLLp4EuGcGOVSQX0pCPmNOwdL1zrAf6LkvAtsVA=",
         "owner": "trevorbernard",
         "repo": "tumbler",
-        "rev": "ad97d6b3c5f8f8faf7911272e3558ee6e3f4fcaa",
+        "rev": "5c327fcc5c895fd5d4df7626f77479c5904f3a22",
         "type": "github"
       },
       "original": {
