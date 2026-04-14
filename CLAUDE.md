@@ -32,38 +32,36 @@ nix flake update nixpkgs      # Update specific input
 nix flake update ghostty      # Update ghostty (pinned to version tag in flake.nix)
 ```
 
-### Updating Claude Code Package
-```bash
-# From nix-common/claude-code/
-./update.sh    # Fetches latest version, updates package-lock.json and hashes
-```
-
 ## Architecture
 
 ```
 ├── aypa/etc/nix-darwin/      # macOS nix-darwin flake
 │   └── flake.nix             # All config inline, uses Homebrew for GUI apps
-├── knowhere/nixos/           # NixOS flake
-│   ├── flake.nix             # Defines overlays for custom packages
-│   ├── configuration.nix     # Main system config
-│   ├── hardware/             # Hardware-specific (truerng, nvidia via configuration.nix)
-│   └── buildkite/            # CI agent setup
-└── nix-common/               # Shared packages across machines
-    └── claude-code/          # Custom npm package derivation
+└── knowhere/nixos/           # NixOS flake
+    ├── flake.nix             # Defines inputs and overlays for custom packages
+    ├── configuration.nix     # Main system config
+    └── hardware/             # Hardware-specific modules (e.g. truerng.nix)
 ```
 
 ## Custom Package Pattern
 
-Packages not in nixpkgs are built locally via overlays. Example in `knowhere/nixos/flake.nix`:
+Packages not in nixpkgs are pulled in as flake inputs and exposed via overlays. Example in `knowhere/nixos/flake.nix`:
+
 ```nix
+inputs = {
+  termcopy.url = "github:trevorbernard/termcopy";
+  termcopy.inputs.nixpkgs.follows = "nixpkgs";
+};
+
+# In the module:
 nixpkgs.overlays = [
   (final: prev: {
-    claude-code = prev.callPackage ./nix/claude-code/default.nix {};
+    termcopy = termcopy.packages.${system}.default;
   })
 ];
 ```
 
-The `nix-common/claude-code/` flake is referenced as a path input by aypa and can be built standalone for both platforms.
+`claude-code` is provided by the external `claude-code-overlay` flake (`github:ryoppippi/claude-code-overlay`) on both machines.
 
 ## Key Configuration Patterns
 

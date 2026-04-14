@@ -10,24 +10,20 @@
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
 
-  # This is my video card settings
   environment.variables = {
     GDK_SCALE = "1";
     GDK_DPI_SCALE = "1";
-  };
-
-  environment.variables = {
-    # QT_SCALE_FACTOR = "1.25";
     QT_QPA_PLATFORM = "wayland";
     GDK_BACKEND = "wayland";
+    GTK_IM_MODULE = "none";
+    COLORTERM = "truecolor";
+    TERM = "xterm-direct";
+    EDITOR = "emacs";
   };
+
   # There is an input lag when working in emacs. This is in attempted to improve it
   i18n.inputMethod.enable = false;
-  environment.variables = {
-    GTK_IM_MODULE = "none";
-  };
 
   # For chromium wayland support
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -102,12 +98,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -157,7 +147,6 @@
     }
   ];
 
-  environment.variables.COLORTERM = "truecolor";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -224,9 +213,6 @@
     fuzzyCompletion = true;
   };
 
-  environment.variables.TERM = "xterm-direct";
-  environment.variables.EDITOR = "emacs";
-
   fonts.packages = with pkgs; [
     fira-code
     nerd-fonts.fira-code
@@ -264,16 +250,6 @@
     gtk-key-theme='Emacs'
   '';
 
-  # environment.etc."xdg/gtk-3.0/settings.ini" = {
-  #   text = ''
-  #     [Settings]
-  #     gtk-key-theme-name=Emacs
-  #   '';
-  # };
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -333,21 +309,15 @@
   };
 
   networking.firewall = {
-    allowedTCPPorts = [ 22 5173 5432 ];
+    allowedTCPPorts = [ 22 ];
     allowedUDPPortRanges = [
       { from = 60000; to = 61000; } # Default mosh port range
     ];
     interfaces."tailscale0" = {
-      allowedTCPPorts = [ 22000 ];
+      allowedTCPPorts = [ 5173 5432 22000 ];
       allowedUDPPorts = [ 22000 21027 ];
     };
   };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
