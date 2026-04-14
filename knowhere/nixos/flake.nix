@@ -3,12 +3,17 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+
     ghostty.url = "github:ghostty-org/ghostty/v1.3.1";
+
     termcopy.url = "github:trevorbernard/termcopy";
     termcopy.inputs.nixpkgs.follows = "nixpkgs";
+
     tumbler.url = "github:trevorbernard/tumbler";
     tumbler.inputs.nixpkgs.follows = "nixpkgs";
+
     claude-code-overlay.url = "github:ryoppippi/claude-code-overlay";
+    claude-code-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, ghostty, termcopy, tumbler, claude-code-overlay, ... }:
