@@ -89,6 +89,7 @@
           "claude"
           "docker-desktop"
           "ghostty"
+          "gitbutler"
           "obsidian"
           "session-manager-plugin"
           "snowflake-cli"
