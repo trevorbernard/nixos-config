@@ -14,7 +14,7 @@
     claude-code
     cmake
     direnv
-    (emacs-nox.override {withNativeCompilation = true;})
+    emacs-nox
     eza
     fzf
     gh
@@ -67,7 +67,8 @@
     ];
   };
 
-  # https://github.com/LnL7/nix-darwin/issues/423
+  # nix-darwin defaults home to /var/empty; set explicitly so
+  # home-manager and GPG can locate the real home directory.
   users.users.tbernard = {
     home = "/Users/tbernard";
     shell = pkgs.zsh;

@@ -28,7 +28,7 @@
           nixpkgs.overlays = [
             claude-code-overlay.overlays.default
             (final: prev: {
-              # direnv checks fail on darwin; see b6cc0d0.
+              # direnv 2.37.1 fish test gets killed by the macOS sandbox.
               direnv = prev.direnv.overrideAttrs (_: {
                 doCheck = false;
               });
