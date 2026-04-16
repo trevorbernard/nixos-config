@@ -194,7 +194,6 @@
     yq
     zip
     zoxide
-    zsh
   ];
 
   users.defaultUserShell = pkgs.zsh;
@@ -216,14 +215,11 @@
   fonts.packages = with pkgs; [
     fira-code
     nerd-fonts.fira-code
-    fira-code-symbols
     jetbrains-mono
   ];
 
   # Enable Emacs keybindings in GNOME
   programs.dconf.enable = true;
-  services.dbus.packages = [ pkgs.dconf ];
-
   programs.dconf = {
     profiles.user.databases = [
       {
