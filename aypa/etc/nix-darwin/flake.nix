@@ -21,7 +21,14 @@
     forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
 
     configuration = {pkgs, lib, config, ...}: {
-      nixpkgs.overlays = [claude-code-overlay.overlays.default];
+      nixpkgs.overlays = [
+        claude-code-overlay.overlays.default
+        (final: prev: {
+          direnv = prev.direnv.overrideAttrs {
+            doCheck = false;
+          };
+        })
+      ];
       nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["claude-code" "1password-cli"];
       # Packages
       environment.systemPackages =
