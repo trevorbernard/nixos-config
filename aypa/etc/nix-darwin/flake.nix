@@ -6,7 +6,9 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     termcopy.url = "github:trevorbernard/termcopy";
+    termcopy.inputs.nixpkgs.follows = "nixpkgs";
     claude-code-overlay.url = "github:ryoppippi/claude-code-overlay";
+    claude-code-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -59,14 +61,13 @@
           # Other
           _1password-cli
           (aspellWithDicts (dicts: with dicts; [en en-computers]))
+          claude-code
           htop
           mosh
           tig
           tmux
         ])
         ++ [
-          # External inputs
-          pkgs.claude-code
           termcopy.packages.${pkgs.stdenv.hostPlatform.system}.default
         ];
 
