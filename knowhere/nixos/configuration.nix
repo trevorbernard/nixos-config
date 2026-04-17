@@ -305,13 +305,14 @@
   };
 
   networking.firewall = {
-    allowedUDPPortRanges = [
-      { from = 60000; to = 61000; } # Default mosh port range
-    ];
-    interfaces."eno1".allowedTCPPorts = [ 22 ];
+    interfaces."eno1" = {
+      allowedTCPPorts = [ 22 ];
+      allowedUDPPortRanges = [ { from = 60000; to = 61000; } ];
+    };
     interfaces."tailscale0" = {
       allowedTCPPorts = [ 22 22000 ];
       allowedUDPPorts = [ 22000 21027 ];
+      allowedUDPPortRanges = [ { from = 60000; to = 61000; } ];
     };
   };
 
