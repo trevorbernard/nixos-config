@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776367649,
-        "narHash": "sha256-gLooTVno5qM/t7unwClQF2twTLoyN31T9ER7f5JNC14=",
+        "lastModified": 1776470992,
+        "narHash": "sha256-IT3l27UrqC8630DruPMwBbgy8+en3DYMBEU6Mmd+cC0=",
         "owner": "ryoppippi",
         "repo": "claude-code-overlay",
-        "rev": "fe159c53e1cb7bf6a8d39ae01bf9d838460b9126",
+        "rev": "3ea6392c9563b0a7f7820e82faffdb075676f9d8",
         "type": "github"
       },
       "original": {
@@ -80,13 +80,34 @@
         "type": "github"
       }
     },
+    "nix-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1772129556,
+        "narHash": "sha256-Utk0zd8STPsUJPyjabhzPc5BpPodLTXrwkpXBHYnpeg=",
+        "owner": "nix-darwin",
+        "repo": "nix-darwin",
+        "rev": "ebec37af18215214173c98cf6356d0aca24a2585",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-darwin",
+        "ref": "nix-darwin-25.11",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1770537093,
-        "narHash": "sha256-XV30uo8tXuxdzuV8l3sojmlPRLd/8tpMsOp4lNzLGUo=",
-        "rev": "fef9403a3e4d31b0a23f0bacebbec52c248fbb51",
+        "lastModified": 1776329215,
+        "narHash": "sha256-mBqzkn7oJti2hqeO8iTbDxKw+1ifxpP53feQ0CEXies=",
+        "rev": "b86751bc4085f48661017fa226dee99fab6c651b",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre942631.fef9403a3e4d/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre981196.b86751bc4085/nixexprs.tar.xz"
       },
       "original": {
         "type": "tarball",
@@ -95,11 +116,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1776067740,
-        "narHash": "sha256-B35lpsqnSZwn1Lmz06BpwF7atPgFmUgw1l8KAV3zpVQ=",
+        "lastModified": 1776434932,
+        "narHash": "sha256-gyqXNMgk3sh+ogY5svd2eNLJ6oEwzbAeaoBrrxD0lKk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "7e495b747b51f95ae15e74377c5ce1fe69c1765f",
+        "rev": "c7f47036d3df2add644c46d712d14262b7d86c0c",
         "type": "github"
       },
       "original": {
@@ -113,6 +134,7 @@
       "inputs": {
         "claude-code-overlay": "claude-code-overlay",
         "ghostty": "ghostty",
+        "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs_2",
         "termcopy": "termcopy",
         "tumbler": "tumbler"
@@ -205,11 +227,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1776206389,
-        "narHash": "sha256-zbaIHLLp4EuGcGOVSQX0pCPmNOwdL1zrAf6LkvAtsVA=",
+        "lastModified": 1776261440,
+        "narHash": "sha256-6IWjNpTfwNnh0Tts1B8wSt+FZNU/CG0bNjQLZgywLRY=",
         "owner": "trevorbernard",
         "repo": "tumbler",
-        "rev": "5c327fcc5c895fd5d4df7626f77479c5904f3a22",
+        "rev": "6b16e121df9ab2ba1facf335f391722096dadff3",
         "type": "github"
       },
       "original": {

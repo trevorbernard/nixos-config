@@ -6,33 +6,39 @@ Personal NixOS/nix-darwin configuration managing multiple machines.
 
 - **knowhere** - NixOS desktop (x86_64-linux) with NVIDIA GPU, GNOME/Wayland
 - **aypa** - macOS (aarch64-darwin) using nix-darwin
+- **macbook** - macOS (aarch64-darwin) using nix-darwin
 
 ## Build Commands
 
-### NixOS (knowhere)
+All commands run from the repo root.
 
 ```bash
-cd knowhere/nixos
+# build only
+sudo nixos-rebuild build --flake '.#knowhere'
+darwin-rebuild build --flake '.#aypa'
+
+# build and activate
 sudo nixos-rebuild switch --flake '.#knowhere'
-```
-
-### macOS (aypa)
-
-```bash
-cd aypa/etc/nix-darwin
 darwin-rebuild switch --flake '.#aypa'
+darwin-rebuild switch --flake '.#macbook'
 ```
 
 ## Structure
 
 ```
-├── aypa/etc/nix-darwin/   # macOS nix-darwin flake
-├── knowhere/nixos/        # NixOS flake
-│   ├── configuration.nix  # Main system configuration
-│   ├── hardware/          # Hardware-specific configurations
-│   ├── buildkite/         # CI agent setup
-│   └── nix/               # Custom package definitions
-└── nix-common/            # Shared packages across machines
+├── flake.nix              # single root flake for all hosts
+├── hosts/
+│   ├── knowhere/          # NixOS desktop
+│   │   ├── default.nix
+│   │   └── hardware/      # hardware-configuration.nix, truerng.nix
+│   ├── aypa/              # macOS work machine
+│   │   └── default.nix
+│   └── macbook/           # macOS personal machine
+│       └── default.nix
+└── modules/
+    └── shared/
+        ├── nix.nix        # nix daemon settings, substituters
+        └── packages.nix   # CLI packages present on every machine
 ```
 
 ## License

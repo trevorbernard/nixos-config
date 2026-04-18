@@ -1,0 +1,89 @@
+{
+  description = "System configurations";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ghostty.url = "github:ghostty-org/ghostty/v1.3.1";
+
+    termcopy = {
+      url = "github:trevorbernard/termcopy";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    tumbler = {
+      url = "github:trevorbernard/tumbler";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    claude-code-overlay = {
+      url = "github:ryoppippi/claude-code-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nix-darwin,
+      ghostty,
+      termcopy,
+      tumbler,
+      claude-code-overlay,
+      ...
+    }:
+    let
+      supportedSystems = [ "x86_64-linux" "aarch64-darwin" ];
+      forEachSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f nixpkgs.legacyPackages.${system});
+
+      linuxOverlays = [
+        claude-code-overlay.overlays.default
+        (final: _: {
+          ghostty = ghostty.packages.${final.stdenv.hostPlatform.system}.default;
+          termcopy = termcopy.packages.${final.stdenv.hostPlatform.system}.default;
+          tumbler = tumbler.packages.${final.stdenv.hostPlatform.system}.default;
+        })
+      ];
+      darwinOverlays = [
+        claude-code-overlay.overlays.default
+        (final: prev: {
+          # direnv fish tests are killed by the macOS sandbox
+          direnv = prev.direnv.overrideAttrs (_: { doCheck = false; });
+          termcopy = termcopy.packages.${final.stdenv.hostPlatform.system}.default;
+        })
+      ];
+    in
+    {
+      nixosConfigurations.knowhere = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit self; };
+        modules = [
+          { nixpkgs.overlays = linuxOverlays; }
+          ./hosts/knowhere/default.nix
+        ];
+      };
+
+      darwinConfigurations.aypa = nix-darwin.lib.darwinSystem {
+        specialArgs = { inherit self; };
+        modules = [
+          { nixpkgs.overlays = darwinOverlays; }
+          ./hosts/aypa/default.nix
+        ];
+      };
+
+      darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
+        specialArgs = { inherit self; };
+        modules = [
+          { nixpkgs.overlays = darwinOverlays; }
+          ./hosts/macbook/default.nix
+        ];
+      };
+
+      formatter = forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
+    };
+}

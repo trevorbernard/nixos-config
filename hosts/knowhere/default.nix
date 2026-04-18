@@ -1,13 +1,19 @@
 { config, pkgs, lib, ... }:
-
 {
   imports = [
-    ./hardware-configuration.nix
+    ../../modules/shared/nix.nix
+    ../../modules/shared/packages.nix
+    ./hardware/hardware-configuration.nix
     ./hardware/truerng.nix
   ];
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
+
+  networking.hostName = "knowhere";
+
+  time.timeZone = "America/Toronto";
+  i18n.defaultLocale = "en_CA.UTF-8";
 
   environment.variables = {
     GDK_SCALE = "1";
@@ -23,13 +29,14 @@
   # Input lag in emacs without this
   i18n.inputMethod.enable = false;
 
-  # For chromium wayland support
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   services.xserver = {
     enable = true;
     dpi = 144;
     videoDrivers = [ "nvidia" ];
   };
+  services.xserver.xkb.layout = "us";
 
   services.displayManager.gdm = {
     enable = true;
@@ -49,7 +56,18 @@
   };
   nixpkgs.config.nvidia.acceptLicense = true;
 
-  networking.hostName = "knowhere";
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "amazon-q-cli"
+      "aspell-dict-en-science"
+      "brave"
+      "claude-code"
+      "nvidia-persistenced"
+      "nvidia-settings"
+      "nvidia-x11"
+      "terraform"
+    ];
 
   virtualisation.docker.enable = true;
 
@@ -68,16 +86,10 @@
     };
   };
 
-  time.timeZone = "America/Toronto";
-
-  i18n.defaultLocale = "en_CA.UTF-8";
-
-  services.xserver.xkb.layout = "us";
-
   services.printing.enable = true;
 
-  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -85,11 +97,26 @@
     pulse.enable = true;
   };
 
+  users.defaultUserShell = pkgs.zsh;
+  environment.shells = [ pkgs.zsh ];
+  programs.zsh.enable = true;
+
+  programs.fzf = {
+    keybindings = true;
+    fuzzyCompletion = true;
+  };
+
+  environment.homeBinInPath = true;
+
   users.users.tbernard = {
     isNormalUser = true;
     shell = pkgs.zsh;
     description = "Trevor Bernard";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILXxbj3QvMLNgvuXvt6xHZKb0Jq/Czy71ROzer2UBNB8 trevor.bernard@gmail.com"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINGrvzXeZ4upwcTK3K99XeGB0gbQSz+e2loo4iykSSRR tbernard@aypa.com"
@@ -99,21 +126,13 @@
       amazon-q-cli
       awscli2
       brave
-      clang
-      claude-code
-      cmake
-      direnv
-      gh
       git-filter-repo
       jujutsu
       keepassxc
       ninja
-      nix-direnv
       signal-desktop
-      starship
       stow
       tailscale
-      termcopy
       tree
       tumbler
     ];
@@ -133,79 +152,37 @@
     }
   ];
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "amazon-q-cli"
-      "aspell-dict-en-science"
-      "brave"
-      "claude-code"
-      "nvidia-persistenced"
-      "nvidia-settings"
-      "nvidia-x11"
-      "terraform"
-    ];
-
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 30d";
   };
 
-  nix.settings = {
-    experimental-features = ["nix-command" "flakes"];
-    extra-substituters = ["https://ryoppippi.cachix.org"];
-    extra-trusted-public-keys = ["ryoppippi.cachix.org-1:b2LbtWNvJeL/qb1B6TYOMK+apaCps4SCbzlPRfSQIms="];
-  };
-
   environment.systemPackages = with pkgs; [
-    (aspellWithDicts (dicts: with dicts; [en en-computers en-science]))
-    atuin
+    (aspellWithDicts (dicts: with dicts; [
+      en
+      en-computers
+      en-science
+    ]))
     bat
-    emacs-nox
-    eza
-    fzf
     ghostty
-    git
     gnome-tweaks
     gnumake
-    htop
     jq
-    libtool
     libvterm
     magic-wormhole
-    mosh
     nh
-    nil
     nix-output-monitor
     nixfmt-rfc-style
     nvd
     ripgrep
     terraform
-    tig
-    tmux
     unzip
     vim
     wl-clipboard
     yq
     zip
-    zoxide
   ];
-
-  users.defaultUserShell = pkgs.zsh;
-  environment.shells = [ pkgs.zsh ];
-
-  environment.sessionVariables = {
-    PATH="$HOME/bin:$PATH";
-  };
-
-  programs.zsh = {
-    enable = true;
-  };
-
-  programs.fzf = {
-    keybindings = true;
-    fuzzyCompletion = true;
-  };
 
   fonts.packages = with pkgs; [
     fira-code
@@ -217,24 +194,22 @@
     enable = true;
     profiles.user.databases = [
       {
-        lockAll = true; # prevents overriding
+        lockAll = true;
         settings =
           let
             empty = lib.gvariant.mkEmptyArray lib.gvariant.type.string;
           in
-            {
-              "org/gnome/desktop/wm/keybindings" = {
-                activate-window-menu=empty;
-              };
+          {
+            "org/gnome/desktop/wm/keybindings" = {
+              activate-window-menu = empty;
             };
+          };
       }
     ];
   };
 
-  # Configure GNOME to use Emacs keybindings
   programs.gnome-terminal.enable = true;
 
-  # Set GTK applications to use Emacs key bindings
   services.desktopManager.gnome.extraGSettingsOverrides = ''
     [org.gnome.desktop.interface]
     gtk-key-theme='Emacs'
@@ -305,11 +280,5 @@
     };
   };
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It's perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11";
 }
