@@ -272,8 +272,6 @@
   systemd.targets.hibernate.enable = false;
   systemd.targets.hybrid-sleep.enable = false;
 
-  programs.mosh.enable = true;
-
   services.syncthing = {
     enable = true;
     user = "tbernard";
