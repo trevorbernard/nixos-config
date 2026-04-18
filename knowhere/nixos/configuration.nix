@@ -126,7 +126,7 @@
       users = [ "tbernard" ];
       commands = [
         {
-          command = "ALL";
+          command = "/run/current-system/sw/bin/nixos-rebuild";
           options = [ "NOPASSWD" ];
         }
       ];
