@@ -1,13 +1,11 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./hardware/truerng.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./hardware/truerng.nix
+  ];
 
-  # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
 
@@ -22,7 +20,7 @@
     EDITOR = "emacs";
   };
 
-  # There is an input lag when working in emacs. This is in attempted to improve it
+  # Input lag in emacs without this
   i18n.inputMethod.enable = false;
 
   # For chromium wayland support
@@ -40,7 +38,6 @@
 
   services.desktopManager.gnome.enable = true;
 
-  # enable OpenGL
   hardware.graphics.enable = true;
 
   hardware.nvidia = {
@@ -52,12 +49,10 @@
   };
   nixpkgs.config.nvidia.acceptLicense = true;
 
-  networking.hostName = "knowhere"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.hostName = "knowhere";
 
   virtualisation.docker.enable = true;
 
-  # Enable networking
   networking.networkmanager.enable = true;
   networking.networkmanager.ensureProfiles.profiles = {
     "Wired connection 1" = {
@@ -73,22 +68,14 @@
     };
   };
 
-  # Set your time zone.
   time.timeZone = "America/Toronto";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  services.xserver.xkb.layout = "us";
 
-  # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -98,7 +85,6 @@
     pulse.enable = true;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tbernard = {
     isNormalUser = true;
     shell = pkgs.zsh;
@@ -118,6 +104,8 @@
       cmake
       direnv
       gh
+      git-filter-repo
+      jujutsu
       keepassxc
       ninja
       nix-direnv
@@ -145,7 +133,6 @@
     }
   ];
 
-
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "amazon-q-cli"
@@ -158,8 +145,6 @@
       "terraform"
     ];
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -171,6 +156,7 @@
     extra-substituters = ["https://ryoppippi.cachix.org"];
     extra-trusted-public-keys = ["ryoppippi.cachix.org-1:b2LbtWNvJeL/qb1B6TYOMK+apaCps4SCbzlPRfSQIms="];
   };
+
   environment.systemPackages = with pkgs; [
     (aspellWithDicts (dicts: with dicts; [en en-computers en-science]))
     atuin
@@ -180,12 +166,10 @@
     fzf
     ghostty
     git
-    git-filter-repo
     gnome-tweaks
     gnumake
     htop
     jq
-    jujutsu
     libtool
     libvterm
     magic-wormhole
@@ -261,9 +245,6 @@
     enableSSHSupport = true;
   };
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
     settings = {
@@ -326,9 +307,9 @@
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # on your system were taken. It's perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "24.11";
 }
