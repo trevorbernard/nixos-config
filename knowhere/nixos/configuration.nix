@@ -41,9 +41,7 @@
   services.desktopManager.gnome.enable = true;
 
   # enable OpenGL
-  hardware.graphics = {
-    enable = true;
-  };
+  hardware.graphics.enable = true;
 
   hardware.nvidia = {
     modesetting.enable = true;
