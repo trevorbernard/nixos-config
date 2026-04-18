@@ -160,6 +160,12 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
     extra-substituters = ["https://ryoppippi.cachix.org"];
