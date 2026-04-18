@@ -9,6 +9,7 @@
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.configurationLimit = 5;
 
   networking.hostName = "knowhere";
 
@@ -154,8 +155,14 @@
 
   nix.gc = {
     automatic = true;
+    persistent = true;
     dates = "weekly";
     options = "--delete-older-than 30d";
+  };
+
+  nix.optimise = {
+    automatic = true;
+    dates = [ "weekly" ];
   };
 
   environment.systemPackages = with pkgs; [
