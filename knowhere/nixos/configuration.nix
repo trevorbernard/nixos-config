@@ -168,10 +168,7 @@
     extra-trusted-public-keys = ["ryoppippi.cachix.org-1:b2LbtWNvJeL/qb1B6TYOMK+apaCps4SCbzlPRfSQIms="];
   };
   environment.systemPackages = with pkgs; [
-    aspell
-    aspellDicts.en
-    aspellDicts.en-computers
-    aspellDicts.en-science
+    (aspellWithDicts (dicts: with dicts; [en en-computers en-science]))
     atuin
     bat
     emacs-nox
