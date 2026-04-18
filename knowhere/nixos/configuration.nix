@@ -225,9 +225,8 @@
     jetbrains-mono
   ];
 
-  # Enable Emacs keybindings in GNOME
-  programs.dconf.enable = true;
   programs.dconf = {
+    enable = true;
     profiles.user.databases = [
       {
         lockAll = true; # prevents overriding
