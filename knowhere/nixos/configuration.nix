@@ -148,8 +148,13 @@
   ];
 
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "amazon-q-cli"
+      "brave"
+      "claude-code"
+      "terraform"
+    ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -186,6 +191,7 @@
     nixfmt-rfc-style
     nvd
     ripgrep
+    terraform
     tig
     tmux
     unzip
