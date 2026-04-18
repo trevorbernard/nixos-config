@@ -151,8 +151,12 @@
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "amazon-q-cli"
+      "aspell-dict-en-science"
       "brave"
       "claude-code"
+      "nvidia-persistenced"
+      "nvidia-settings"
+      "nvidia-x11"
       "terraform"
     ];
 
@@ -291,7 +295,7 @@
       devices = {
         "macbook-pro" = {
           id = "MD5DF3C-DKWSXWZ-YSJMJ5N-TB2HQWW-L3RYVK2-VIS6JHK-RVHFCHZ-WSA2NQH";
-          addresses = [ "tcp://100.109.146.56:22000" ];
+          addresses = [ "tcp://macbook-pro.tailb5107e.ts.net:22000" ];
         };
         # ipad and iphone entries added once Möbius Sync device IDs are known
       };
