@@ -1,4 +1,4 @@
-{ self, ... }:
+{ self, pkgs, lib, ... }:
 {
   system.configurationRevision = self.rev or self.dirtyRev or null;
 
@@ -12,13 +12,19 @@
 
   nix.gc = {
     automatic = true;
+    options = "--delete-older-than 30d";
+  } // lib.optionalAttrs pkgs.stdenv.isLinux {
     persistent = true;
     dates = "weekly";
-    options = "--delete-older-than 30d";
+  } // lib.optionalAttrs pkgs.stdenv.isDarwin {
+    interval = { Weekday = 0; Hour = 3; Minute = 15; };
   };
 
   nix.optimise = {
     automatic = true;
+  } // lib.optionalAttrs pkgs.stdenv.isLinux {
     dates = [ "weekly" ];
+  } // lib.optionalAttrs pkgs.stdenv.isDarwin {
+    interval = { Weekday = 0; Hour = 4; Minute = 15; };
   };
 }
