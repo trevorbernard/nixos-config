@@ -32,12 +32,15 @@
           id = "MD5DF3C-DKWSXWZ-YSJMJ5N-TB2HQWW-L3RYVK2-VIS6JHK-RVHFCHZ-WSA2NQH";
           addresses = [ "tcp://macbook-pro.tailb5107e.ts.net:22000" ];
         };
-        # ipad and iphone entries added once Möbius Sync device IDs are known
+        "iphone-14-pro-max" = {
+          id = "U4P5FMV-77L2A5M-YIA6FQX-LWTZZUL-TKHZ5TT-CUATEER-ILOWE3U-YHBS5QB";
+          addresses = [ "tcp://iphone-14-pro-max.tailb5107e.ts.net:22000" ];
+        };
       };
       folders = {
         "keepass" = {
           path = "/home/tbernard/Sync/keepass";
-          devices = [ "macbook-pro" ];
+          devices = [ "macbook-pro" "iphone-14-pro-max" ];
         };
         "documents" = {
           path = "/home/tbernard/Sync/documents";
