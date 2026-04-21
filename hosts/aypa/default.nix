@@ -12,12 +12,14 @@
     builtins.elem (lib.getName pkg) [
       "1password-cli"
       "claude-code"
+      "terraform"
     ];
 
   environment.systemPackages = with pkgs; [
     _1password-cli
     (aspellWithDicts (dicts: [ dicts.en dicts.en-computers ]))
     neovim
+    terraform
   ];
 
   homebrew = {
