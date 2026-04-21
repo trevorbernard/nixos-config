@@ -20,6 +20,7 @@
     termcopy
     tig
     tmux
+    tumbler
     zoxide
   ];
 }
