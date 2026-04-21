@@ -56,6 +56,7 @@
           # direnv fish tests are killed by the macOS sandbox
           direnv = prev.direnv.overrideAttrs (_: { doCheck = false; });
           termcopy = termcopy.packages.${final.stdenv.hostPlatform.system}.default;
+          tumbler = tumbler.packages.${final.stdenv.hostPlatform.system}.default;
         })
       ];
     in
