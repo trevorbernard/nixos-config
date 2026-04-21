@@ -17,7 +17,7 @@
     };
 
     tumbler = {
-      url = "github:trevorbernard/tumbler";
+      url = "github:trevorbernard/tumbler/v0.1.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

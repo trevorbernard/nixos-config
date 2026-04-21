@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776470992,
-        "narHash": "sha256-IT3l27UrqC8630DruPMwBbgy8+en3DYMBEU6Mmd+cC0=",
+        "lastModified": 1776715915,
+        "narHash": "sha256-I7fkAJ6AVn5DYMHbEKrSJs3tEeKfttlV+KtAJQGiZNk=",
         "owner": "ryoppippi",
         "repo": "claude-code-overlay",
-        "rev": "3ea6392c9563b0a7f7820e82faffdb075676f9d8",
+        "rev": "2a785ef23ac866c91b372c89ea75eae95ece5832",
         "type": "github"
       },
       "original": {
@@ -227,15 +227,16 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1776261440,
-        "narHash": "sha256-6IWjNpTfwNnh0Tts1B8wSt+FZNU/CG0bNjQLZgywLRY=",
+        "lastModified": 1776733837,
+        "narHash": "sha256-SiCX10b5bRxFfq2ymixng1FPYOs6ouvrFvbCbIjIvHQ=",
         "owner": "trevorbernard",
         "repo": "tumbler",
-        "rev": "6b16e121df9ab2ba1facf335f391722096dadff3",
+        "rev": "905420989a27e0ac99610b80a35e93e1bc1435cb",
         "type": "github"
       },
       "original": {
         "owner": "trevorbernard",
+        "ref": "v0.1.2",
         "repo": "tumbler",
         "type": "github"
       }
