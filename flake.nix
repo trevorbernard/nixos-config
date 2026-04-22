@@ -9,8 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ghostty.url = "github:ghostty-org/ghostty/v1.3.1";
-
     termcopy = {
       url = "github:trevorbernard/termcopy";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,7 +30,6 @@
       self,
       nixpkgs,
       nix-darwin,
-      ghostty,
       termcopy,
       tumbler,
       claude-code-overlay,
@@ -45,7 +42,6 @@
       linuxOverlays = [
         claude-code-overlay.overlays.default
         (final: _: {
-          ghostty = ghostty.packages.${final.stdenv.hostPlatform.system}.default;
           termcopy = termcopy.packages.${final.stdenv.hostPlatform.system}.default;
           tumbler = tumbler.packages.${final.stdenv.hostPlatform.system}.default;
         })
