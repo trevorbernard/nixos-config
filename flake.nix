@@ -39,20 +39,17 @@
       supportedSystems = [ "x86_64-linux" "aarch64-darwin" ];
       forEachSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f nixpkgs.legacyPackages.${system});
 
-      linuxOverlays = [
+      commonOverlays = [
         claude-code-overlay.overlays.default
         (final: _: {
           termcopy = termcopy.packages.${final.stdenv.hostPlatform.system}.default;
           tumbler = tumbler.packages.${final.stdenv.hostPlatform.system}.default;
         })
       ];
-      darwinOverlays = [
-        claude-code-overlay.overlays.default
-        (final: prev: {
+      darwinOverlays = commonOverlays ++ [
+        (_: prev: {
           # direnv fish tests are killed by the macOS sandbox
           direnv = prev.direnv.overrideAttrs (_: { doCheck = false; });
-          termcopy = termcopy.packages.${final.stdenv.hostPlatform.system}.default;
-          tumbler = tumbler.packages.${final.stdenv.hostPlatform.system}.default;
         })
       ];
     in
@@ -60,7 +57,7 @@
       nixosConfigurations.knowhere = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit self; };
         modules = [
-          { nixpkgs.overlays = linuxOverlays; }
+          { nixpkgs.overlays = commonOverlays; }
           ./hosts/knowhere/default.nix
         ];
       };
