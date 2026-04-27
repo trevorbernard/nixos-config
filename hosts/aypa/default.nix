@@ -18,6 +18,7 @@
   environment.systemPackages = with pkgs; [
     _1password-cli
     (aspellWithDicts (dicts: [ dicts.en dicts.en-computers ]))
+    awscli2
     neovim
     terraform
   ];
