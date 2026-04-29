@@ -65,8 +65,6 @@
     ];
   };
 
-  programs.gnome-terminal.enable = true;
-
   services.desktopManager.gnome.extraGSettingsOverrides = ''
     [org.gnome.desktop.interface]
     gtk-key-theme='Emacs'
