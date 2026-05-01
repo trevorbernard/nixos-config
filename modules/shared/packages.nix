@@ -13,6 +13,7 @@
     git
     htop
     libtool
+    magic-wormhole
     mosh
     nil
     nix-direnv
