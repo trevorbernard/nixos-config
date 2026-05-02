@@ -2,6 +2,8 @@
 {
   system.configurationRevision = self.rev or self.dirtyRev or null;
 
+  nix.enable = false;
+
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     extra-substituters = [ "https://ryoppippi.cachix.org" ];
@@ -10,21 +12,15 @@
     ];
   };
 
-  nix.gc = {
+  nix.gc = lib.mkIf pkgs.stdenv.isLinux {
     automatic = true;
-    options = "--delete-older-than 30d";
-  } // lib.optionalAttrs pkgs.stdenv.isLinux {
     persistent = true;
     dates = "weekly";
-  } // lib.optionalAttrs pkgs.stdenv.isDarwin {
-    interval = { Weekday = 0; Hour = 3; Minute = 15; };
+    options = "--delete-older-than 30d";
   };
 
-  nix.optimise = {
+  nix.optimise = lib.mkIf pkgs.stdenv.isLinux {
     automatic = true;
-  } // lib.optionalAttrs pkgs.stdenv.isLinux {
     dates = [ "weekly" ];
-  } // lib.optionalAttrs pkgs.stdenv.isDarwin {
-    interval = { Weekday = 0; Hour = 4; Minute = 15; };
   };
 }
