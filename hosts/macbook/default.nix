@@ -19,6 +19,9 @@
     (aspellWithDicts (dicts: [ dicts.en dicts.en-computers ]))
   ];
 
+  services.syncthing.enable = true;
+  services.tailscale.enable = true;
+
   homebrew = {
     enable = true;
     onActivation.cleanup = "zap";
@@ -26,6 +29,7 @@
       "1password"
       "brave-browser"
       "claude"
+      "docker"
       "obsidian"
       "spotify"
     ];
