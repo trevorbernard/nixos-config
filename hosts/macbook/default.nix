@@ -19,7 +19,6 @@
     (aspellWithDicts (dicts: [ dicts.en dicts.en-computers ]))
   ];
 
-  services.syncthing.enable = true;
   services.tailscale.enable = true;
 
   homebrew = {
@@ -32,6 +31,7 @@
       "docker"
       "obsidian"
       "spotify"
+      "syncthing"
     ];
     brews = [
       "gnupg"
