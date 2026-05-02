@@ -10,12 +10,10 @@
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
-      "1password-cli"
       "claude-code"
     ];
 
   environment.systemPackages = with pkgs; [
-    _1password-cli
     (aspellWithDicts (dicts: [ dicts.en dicts.en-computers ]))
   ];
 
@@ -25,13 +23,12 @@
     enable = true;
     onActivation.cleanup = "zap";
     casks = [
-      "1password"
       "brave-browser"
       "claude"
-      "docker"
+      "docker-desktop"
       "obsidian"
       "spotify"
-      "syncthing"
+      "syncthing-app"
     ];
     brews = [
       "gnupg"
