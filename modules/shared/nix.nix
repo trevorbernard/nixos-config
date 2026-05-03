@@ -2,7 +2,7 @@
 {
   system.configurationRevision = self.rev or self.dirtyRev or null;
 
-  nix.enable = false;
+  nix.enable = lib.mkIf pkgs.stdenv.isDarwin false;
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
