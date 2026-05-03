@@ -28,9 +28,9 @@
         relaysEnabled = false;
       };
       devices = {
-        "macbookpro" = {
+        "trevors-macbook-pro" = {
           id = "7PT5A4B-MT3KS5N-VDEC76N-JNXHXYY-UA2AIH5-SMM7G4P-2VU74IS-V3USRAG";
-          addresses = [ "tcp://macbookpro.tailb5107e.ts.net:22000" ];
+          addresses = [ "tcp://trevors-macbook-pro.tailb5107e.ts.net:22000" ];
         };
         "iphone-14-pro-max" = {
           id = "U4P5FMV-77L2A5M-YIA6FQX-LWTZZUL-TKHZ5TT-CUATEER-ILOWE3U-YHBS5QB";
@@ -40,11 +40,11 @@
       folders = {
         "keepass" = {
           path = "/home/tbernard/Sync/keepass";
-          devices = [ "macbookpro" "iphone-14-pro-max" ];
+          devices = [ "trevors-macbook-pro" "iphone-14-pro-max" ];
         };
         "documents" = {
           path = "/home/tbernard/Sync/documents";
-          devices = [ "macbookpro" ];
+          devices = [ "trevors-macbook-pro" ];
         };
       };
     };
