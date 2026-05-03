@@ -25,7 +25,6 @@
     gnumake
     jq
     libvterm
-    magic-wormhole
     nh
     nix-output-monitor
     nixfmt-rfc-style

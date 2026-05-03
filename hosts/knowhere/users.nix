@@ -38,7 +38,6 @@
       stow
       tailscale
       tree
-      tumbler
     ];
   };
 
