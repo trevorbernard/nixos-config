@@ -7,6 +7,7 @@
     ./hardware/truerng.nix
     ./audio.nix
     ./desktop.nix
+    ./git-server.nix
     ./networking.nix
     ./packages.nix
     ./services.nix
