@@ -10,10 +10,9 @@
       "claude-code"
     ];
 
-  services.tailscale.enable = true;
-
   homebrew.casks = [
     "slack"
     "syncthing-app"
+    "tailscale-app"
   ];
 }
