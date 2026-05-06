@@ -2,8 +2,6 @@
 {
   system.configurationRevision = self.rev or self.dirtyRev or null;
 
-  nix.enable = lib.mkIf pkgs.stdenv.isDarwin false;
-
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     extra-substituters = [ "https://ryoppippi.cachix.org" ];
