@@ -15,7 +15,7 @@
   ];
 
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.device = "/dev/disk/by-id/ata-KINGSTON_SA400S37240G_50026B7784FFE11F";
   boot.loader.grub.configurationLimit = 5;
 
   networking.hostName = "knowhere";
