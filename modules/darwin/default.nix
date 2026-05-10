@@ -3,6 +3,7 @@
   imports = [
     ../shared/nix.nix
     ../shared/packages.nix
+    ../shared/fonts.nix
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
