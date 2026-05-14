@@ -18,6 +18,7 @@
     nil
     nix-direnv
     starship
+    stow
     termcopy
     tig
     tmux
