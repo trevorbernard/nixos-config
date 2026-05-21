@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ../../modules/darwin
@@ -11,7 +11,12 @@
     pkg:
     builtins.elem (lib.getName pkg) [
       "claude-code"
+      "pencil-cli"
     ];
+
+  environment.systemPackages = [
+    (pkgs.callPackage ../../pkgs/pencil-cli { })
+  ];
 
   homebrew.casks = [
     "slack"
