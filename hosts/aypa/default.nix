@@ -9,6 +9,7 @@
     builtins.elem (lib.getName pkg) [
       "1password-cli"
       "claude-code"
+      "sonarqube-cli"
       "terraform"
     ];
 
@@ -17,6 +18,7 @@
     awscli2
     neovim
     terraform
+    (callPackage ../../pkgs/sonarqube-cli { })
   ];
 
   homebrew = {
