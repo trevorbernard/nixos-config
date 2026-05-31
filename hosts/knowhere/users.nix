@@ -35,8 +35,6 @@
       keepassxc
       ninja
       signal-desktop
-      stow
-      tailscale
       tree
     ];
   };

@@ -1,17 +1,14 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../../modules/darwin
   ];
 
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "1password-cli"
-      "claude-code"
-      "sonarqube-cli"
-      "terraform"
-    ];
+  my.unfreePackages = [
+    "1password-cli"
+    "sonarqube-cli"
+    "terraform"
+  ];
 
   environment.systemPackages = with pkgs; [
     _1password-cli

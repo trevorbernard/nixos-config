@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  imports = [ ./unfree.nix ];
+
   environment.systemPackages = with pkgs; [
     atuin
     clang

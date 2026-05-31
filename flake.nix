@@ -36,8 +36,12 @@
       ...
     }:
     let
-      supportedSystems = [ "x86_64-linux" "aarch64-darwin" ];
-      forEachSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f nixpkgs.legacyPackages.${system});
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+      ];
+      forEachSystem =
+        f: nixpkgs.lib.genAttrs supportedSystems (system: f nixpkgs.legacyPackages.${system});
 
       commonOverlays = [
         claude-code-overlay.overlays.default
@@ -49,7 +53,9 @@
       darwinOverlays = commonOverlays ++ [
         (_: prev: {
           # direnv fish tests are killed by the macOS sandbox
-          direnv = prev.direnv.overrideAttrs (_: { doCheck = false; });
+          direnv = prev.direnv.overrideAttrs (_: {
+            doCheck = false;
+          });
         })
       ];
     in
@@ -77,6 +83,18 @@
           ./hosts/macbook/default.nix
         ];
       };
+
+      packages.aarch64-darwin =
+        let
+          pkgs = import nixpkgs {
+            system = "aarch64-darwin";
+            config.allowUnfree = true;
+          };
+        in
+        {
+          pencil-cli = pkgs.callPackage ./pkgs/pencil-cli { };
+          sonarqube-cli = pkgs.callPackage ./pkgs/sonarqube-cli { };
+        };
 
       formatter = forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
     };

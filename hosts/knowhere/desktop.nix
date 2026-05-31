@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   environment.variables = {
     GDK_SCALE = "1";
@@ -41,10 +46,10 @@
   };
   nixpkgs.config.nvidia.acceptLicense = true;
 
+  # jetbrains-mono comes from modules/shared/fonts.nix; these are desktop-only.
   fonts.packages = with pkgs; [
     fira-code
     nerd-fonts.fira-code
-    jetbrains-mono
   ];
 
   programs.dconf = {
