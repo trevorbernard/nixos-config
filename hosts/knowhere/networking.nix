@@ -1,6 +1,9 @@
 { ... }:
 {
   networking.networkmanager.enable = true;
+  # NetworkManager owns interface config; disable the global DHCP default
+  # (set by hardware-configuration.nix) to avoid a redundant DHCP client.
+  networking.useDHCP = false;
   networking.networkmanager.ensureProfiles.profiles = {
     "Wired connection 1" = {
       connection = {
@@ -40,7 +43,10 @@
       folders = {
         "keepass" = {
           path = "/home/tbernard/Sync/keepass";
-          devices = [ "trevors-macbook-pro" "iphone-14-pro-max" ];
+          devices = [
+            "trevors-macbook-pro"
+            "iphone-14-pro-max"
+          ];
         };
         "documents" = {
           path = "/home/tbernard/Sync/documents";
@@ -53,12 +59,28 @@
   networking.firewall = {
     interfaces."eno1" = {
       allowedTCPPorts = [ 22 ];
-      allowedUDPPortRanges = [ { from = 60000; to = 61000; } ];
+      allowedUDPPortRanges = [
+        {
+          from = 60000;
+          to = 61000;
+        }
+      ];
     };
     interfaces."tailscale0" = {
-      allowedTCPPorts = [ 22 22000 ];
-      allowedUDPPorts = [ 22000 21027 ];
-      allowedUDPPortRanges = [ { from = 60000; to = 61000; } ];
+      allowedTCPPorts = [
+        22
+        22000
+      ];
+      allowedUDPPorts = [
+        22000
+        21027
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 60000;
+          to = 61000;
+        }
+      ];
     };
   };
 }

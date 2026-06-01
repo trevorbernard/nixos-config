@@ -96,6 +96,15 @@
           sonarqube-cli = pkgs.callPackage ./pkgs/sonarqube-cli { };
         };
 
+      # `nix flake check` builds each host's toplevel on its matching system.
+      checks = {
+        x86_64-linux.knowhere = self.nixosConfigurations.knowhere.config.system.build.toplevel;
+        aarch64-darwin = {
+          aypa = self.darwinConfigurations.aypa.config.system.build.toplevel;
+          macbook = self.darwinConfigurations.macbook.config.system.build.toplevel;
+        };
+      };
+
       formatter = forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
     };
 }

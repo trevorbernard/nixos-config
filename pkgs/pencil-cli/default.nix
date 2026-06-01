@@ -25,8 +25,10 @@ buildNpmPackage (finalAttrs: {
 
   inherit nodejs;
 
+  # The bundled MCP server binaries ship without the executable bit. Fail
+  # loudly if the glob ever stops matching so a packaging change is caught.
   postInstall = ''
-    chmod +x "$out/lib/node_modules/@pencil.dev/cli/dist/out"/mcp-server-darwin-* || true
+    chmod +x "$out/lib/node_modules/@pencil.dev/cli/dist/out"/mcp-server-darwin-*
   '';
 
   meta = {

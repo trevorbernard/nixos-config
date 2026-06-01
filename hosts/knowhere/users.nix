@@ -1,4 +1,7 @@
 { pkgs, ... }:
+let
+  sshKeys = import ../../modules/shared/ssh-keys.nix;
+in
 {
   users.defaultUserShell = pkgs.zsh;
   environment.shells = [ pkgs.zsh ];
@@ -21,9 +24,9 @@
       "docker"
     ];
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILXxbj3QvMLNgvuXvt6xHZKb0Jq/Czy71ROzer2UBNB8 trevor.bernard@gmail.com"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINGrvzXeZ4upwcTK3K99XeGB0gbQSz+e2loo4iykSSRR tbernard@aypa.com"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPt+TYVbgsasgfQFlMonpqw5YBHozhKAvyO4oFrwEimt trevor.bernard@pm.me"
+      sshKeys.gmail
+      sshKeys.aypa
+      sshKeys.pm
     ];
     packages = with pkgs; [
       adw-gtk3
