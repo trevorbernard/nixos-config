@@ -4,6 +4,7 @@
     "amazon-q-cli"
     "aspell-dict-en-science"
     "brave"
+    "nvidia-kernel-modules"
     "nvidia-persistenced"
     "nvidia-settings"
     "nvidia-x11"
