@@ -13,6 +13,7 @@
     fzf
     gh
     git
+    graphify
     htop
     libtool
     magic-wormhole

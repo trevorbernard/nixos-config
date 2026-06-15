@@ -48,6 +48,7 @@
         (final: _: {
           termcopy = termcopy.packages.${final.stdenv.hostPlatform.system}.default;
           tumbler = tumbler.packages.${final.stdenv.hostPlatform.system}.default;
+          graphify = final.callPackage ./pkgs/graphify { };
         })
       ];
       darwinOverlays = commonOverlays ++ [
