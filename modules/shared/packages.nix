@@ -15,6 +15,7 @@
     git
     graphify
     htop
+    hunk
     libtool
     magic-wormhole
     mosh

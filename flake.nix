@@ -19,6 +19,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # hunk's flake targets nixpkgs-unstable (bun2nix); don't pin it to ours.
+    hunk.url = "github:modem-dev/hunk";
+
     claude-code-overlay = {
       url = "github:ryoppippi/claude-code-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,6 +35,7 @@
       nix-darwin,
       termcopy,
       tumbler,
+      hunk,
       claude-code-overlay,
       ...
     }:
@@ -48,6 +52,7 @@
         (final: _: {
           termcopy = termcopy.packages.${final.stdenv.hostPlatform.system}.default;
           tumbler = tumbler.packages.${final.stdenv.hostPlatform.system}.default;
+          hunk = hunk.packages.${final.stdenv.hostPlatform.system}.default;
           graphify = final.callPackage ./pkgs/graphify { };
         })
       ];
