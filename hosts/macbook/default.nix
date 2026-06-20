@@ -14,6 +14,7 @@
   ];
 
   homebrew.casks = [
+    "signal"
     "slack"
     "syncthing-app"
     "tailscale-app"
