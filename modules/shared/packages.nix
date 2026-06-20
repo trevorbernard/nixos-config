@@ -18,6 +18,7 @@
     hunk
     libtool
     magic-wormhole
+    mcp-nixos
     mosh
     nil
     nix-direnv
