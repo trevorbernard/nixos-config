@@ -56,14 +56,6 @@
           graphify = final.callPackage ./pkgs/graphify { };
         })
       ];
-      darwinOverlays = commonOverlays ++ [
-        (_: prev: {
-          # direnv fish tests are killed by the macOS sandbox
-          direnv = prev.direnv.overrideAttrs (_: {
-            doCheck = false;
-          });
-        })
-      ];
     in
     {
       nixosConfigurations.knowhere = nixpkgs.lib.nixosSystem {
@@ -77,7 +69,7 @@
       darwinConfigurations.aypa = nix-darwin.lib.darwinSystem {
         specialArgs = { inherit self; };
         modules = [
-          { nixpkgs.overlays = darwinOverlays; }
+          { nixpkgs.overlays = commonOverlays; }
           ./hosts/aypa/default.nix
         ];
       };
@@ -85,7 +77,7 @@
       darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
         specialArgs = { inherit self; };
         modules = [
-          { nixpkgs.overlays = darwinOverlays; }
+          { nixpkgs.overlays = commonOverlays; }
           ./hosts/macbook/default.nix
         ];
       };

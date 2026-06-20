@@ -2,12 +2,15 @@
 {
   imports = [ ./unfree.nix ];
 
+  # Installs direnv + nix-direnv and wires up the shell hook; works on both
+  # NixOS and nix-darwin, so it replaces the bare direnv/nix-direnv packages.
+  programs.direnv.enable = true;
+
   environment.systemPackages = with pkgs; [
     atuin
     clang
     claude-code
     cmake
-    direnv
     emacs-nox
     eza
     fzf
@@ -21,7 +24,6 @@
     mcp-nixos
     mosh
     nil
-    nix-direnv
     starship
     stow
     termcopy
