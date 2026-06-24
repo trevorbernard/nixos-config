@@ -4,6 +4,14 @@
     ../../modules/darwin
   ];
 
+  # graphify ships from modules/shared with no LLM backend; aypa enables its
+  # OpenAI extra so the shared systemPackages entry resolves to that variant.
+  nixpkgs.overlays = [
+    (_: prev: {
+      graphify = prev.graphify.override { withOpenai = true; };
+    })
+  ];
+
   my.unfreePackages = [
     "1password-cli"
     "sonarqube-cli"

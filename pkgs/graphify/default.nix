@@ -2,6 +2,7 @@
   lib,
   python3Packages,
   fetchPypi,
+  withOpenai ? false,
 }:
 
 let
@@ -35,7 +36,16 @@ python3Packages.buildPythonApplication rec {
     ++ [
       tree-sitter-java
       tree-sitter-typescript
-    ];
+    ]
+    # graphify[openai]: the OpenAI backend imports these lazily, so they are
+    # only pulled in when the host opts into the extra.
+    ++ lib.optionals withOpenai (
+      with python3Packages;
+      [
+        openai
+        tiktoken
+      ]
+    );
 
   # graphify declares every supported grammar as a hard dependency but imports
   # each lazily in try/except, so we ship only the grammars we want and strip
