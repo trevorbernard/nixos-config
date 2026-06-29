@@ -32,11 +32,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782162467,
-        "narHash": "sha256-t+93quoh6LStcf15Q7ws8bBL8sIBfk/VQ7KYKtbgxW0=",
+        "lastModified": 1782498611,
+        "narHash": "sha256-4Mx9PDhsIseuKHtGj3FLoivcStFJXjyuNmyeH/gOI/U=",
         "owner": "ryoppippi",
         "repo": "claude-code-overlay",
-        "rev": "6c7a4dcf7add443819eac7118151d92df2dfc60a",
+        "rev": "410754bb69bc0b874cea02e25a754b972835114d",
         "type": "github"
       },
       "original": {
