@@ -21,6 +21,7 @@
       "docker-desktop"
       "obsidian"
       "spotify"
+      "supacode"
     ];
     brews = [
       "gnupg"
