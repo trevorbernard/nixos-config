@@ -12,7 +12,6 @@
     GDK_BACKEND = "wayland";
     GTK_IM_MODULE = "none";
     COLORTERM = "truecolor";
-    TERM = "xterm-direct";
     EDITOR = "emacs";
   };
 
