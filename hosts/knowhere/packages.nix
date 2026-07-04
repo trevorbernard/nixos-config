@@ -27,7 +27,7 @@
     libvterm
     nh
     nix-output-monitor
-    nixfmt-rfc-style
+    nixfmt
     nvd
     ripgrep
     terraform
