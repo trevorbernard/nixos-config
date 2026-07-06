@@ -10,7 +10,7 @@
     };
 
     termcopy = {
-      url = "github:trevorbernard/termcopy/v0.2.0";
+      url = "github:trevorbernard/termcopy/v0.3.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
