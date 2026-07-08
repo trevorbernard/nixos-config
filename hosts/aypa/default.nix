@@ -33,9 +33,17 @@
   ];
 
   homebrew = {
+    # Homebrew 6 refuses formulae/casks from non-official taps unless the
+    # Brewfile marks the tap trusted (HOMEBREW_REQUIRE_TAP_TRUST).
     taps = [
-      "snowflakedb/snowflake-cli"
-      "atlassian-labs/acli"
+      {
+        name = "snowflakedb/snowflake-cli";
+        trusted = true;
+      }
+      {
+        name = "atlassian-labs/acli";
+        trusted = true;
+      }
     ];
     casks = [
       "1password"
