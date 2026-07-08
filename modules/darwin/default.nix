@@ -25,6 +25,7 @@
     ];
     brews = [
       "gnupg"
+      "herdr"
     ];
   };
 
