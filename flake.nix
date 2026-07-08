@@ -20,7 +20,7 @@
     };
 
     # hunk's flake targets nixpkgs-unstable (bun2nix); don't pin it to ours.
-    hunk.url = "github:modem-dev/hunk";
+    hunk.url = "github:modem-dev/hunk/v0.17.0";
 
     claude-code-overlay = {
       url = "github:ryoppippi/claude-code-overlay";
