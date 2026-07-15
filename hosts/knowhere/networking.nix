@@ -18,6 +18,10 @@
     };
   };
 
+  # Split DNS: Tailscale registers 100.100.100.100 only for ts.net instead
+  # of owning /etc/resolv.conf, so a down tailscaled can't break all DNS.
+  services.resolved.enable = true;
+
   services.tailscale.enable = true;
 
   services.syncthing = {
