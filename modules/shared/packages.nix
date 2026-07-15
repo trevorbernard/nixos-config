@@ -24,6 +24,7 @@
     mcp-nixos
     mosh
     nil
+    openspec
     starship
     stow
     termcopy

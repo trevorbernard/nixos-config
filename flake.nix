@@ -54,6 +54,7 @@
           tumbler = tumbler.packages.${final.stdenv.hostPlatform.system}.default;
           hunk = hunk.packages.${final.stdenv.hostPlatform.system}.default;
           graphify = final.callPackage ./pkgs/graphify { };
+          openspec = final.callPackage ./pkgs/openspec { };
         })
       ];
     in
