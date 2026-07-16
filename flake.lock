@@ -63,6 +63,27 @@
         "type": "github"
       }
     },
+    "herdr": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1783464789,
+        "narHash": "sha256-Q2yvMs/N6oAF8xnRIrMxEOOV6Aj8aAXQzuvcaux2enA=",
+        "owner": "ogulcancelik",
+        "repo": "herdr",
+        "rev": "299dd4163a96381ec2d8e5bde13d7ba6d6432373",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ogulcancelik",
+        "ref": "v0.7.3",
+        "repo": "herdr",
+        "type": "github"
+      }
+    },
     "hunk": {
       "inputs": {
         "bun2nix": "bun2nix",
@@ -169,6 +190,7 @@
     "root": {
       "inputs": {
         "claude-code-overlay": "claude-code-overlay",
+        "herdr": "herdr",
         "hunk": "hunk",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs_2",

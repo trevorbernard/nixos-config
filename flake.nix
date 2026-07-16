@@ -26,6 +26,11 @@
       url = "github:ryoppippi/claude-code-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    herdr = {
+      url = "github:ogulcancelik/herdr/v0.7.3";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -37,6 +42,7 @@
       tumbler,
       hunk,
       claude-code-overlay,
+      herdr,
       ...
     }:
     let
@@ -53,6 +59,7 @@
           termcopy = termcopy.packages.${final.stdenv.hostPlatform.system}.default;
           tumbler = tumbler.packages.${final.stdenv.hostPlatform.system}.default;
           hunk = hunk.packages.${final.stdenv.hostPlatform.system}.default;
+          herdr = herdr.packages.${final.stdenv.hostPlatform.system}.default;
           graphify = final.callPackage ./pkgs/graphify { };
           openspec = final.callPackage ./pkgs/openspec { };
         })
