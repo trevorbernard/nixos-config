@@ -127,14 +127,32 @@
         }
       );
 
-      # `nix flake check` builds each host's toplevel on its matching system.
-      checks = {
-        x86_64-linux.knowhere = self.nixosConfigurations.knowhere.config.system.build.toplevel;
-        aarch64-darwin = {
-          aypa = self.darwinConfigurations.aypa.config.system.build.toplevel;
-          macbook = self.darwinConfigurations.macbook.config.system.build.toplevel;
-        };
-      };
+      # `nix flake check` builds every host toplevel and package belonging to
+      # the system it runs on, plus a formatting gate.
+      checks = forEachSystem (
+        pkgs:
+        let
+          inherit (pkgs.stdenv.hostPlatform) system;
+          toplevels =
+            nixpkgs.lib.optionalAttrs (system == "x86_64-linux") {
+              knowhere = self.nixosConfigurations.knowhere.config.system.build.toplevel;
+            }
+            // nixpkgs.lib.optionalAttrs (system == "aarch64-darwin") {
+              aypa = self.darwinConfigurations.aypa.config.system.build.toplevel;
+              macbook = self.darwinConfigurations.macbook.config.system.build.toplevel;
+            };
+        in
+        toplevels
+        // self.packages.${system}
+        // {
+          # Files are passed individually because nixfmt has deprecated
+          # directory arguments.
+          formatting = pkgs.runCommandLocal "check-formatting" { nativeBuildInputs = [ pkgs.nixfmt ]; } ''
+            find ${self} -name '*.nix' -exec nixfmt --check {} +
+            touch $out
+          '';
+        }
+      );
 
       # nixfmt-tree (treefmt) rather than bare nixfmt: it walks the tree, so
       # `nix fmt` with no arguments works instead of erroring on stdin.
