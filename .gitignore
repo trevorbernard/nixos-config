@@ -1,3 +1,5 @@
+# track .claude here despite the global gitignore, except local settings
+!.claude/
 .claude/settings.local.json
 
 # nix build symlinks
