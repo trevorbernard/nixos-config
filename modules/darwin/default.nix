@@ -22,9 +22,10 @@
       "spotify"
       "supacode"
     ];
+    # herdr now comes from the flake input via modules/shared/packages.nix,
+    # which pins it; the brew tracked whatever was installed at the time.
     brews = [
       "gnupg"
-      "herdr"
     ];
   };
 

@@ -23,7 +23,6 @@
     ghostty
     gnome-tweaks
     gnumake
-    herdr
     jq
     libvterm
     nh

@@ -29,6 +29,7 @@ in
       gh
       git
       (graphify.override { inherit (cfg) withOpenai; })
+      herdr
       htop
       hunk
       libtool
