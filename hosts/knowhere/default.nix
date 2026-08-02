@@ -1,9 +1,7 @@
 { ... }:
 {
   imports = [
-    ../../modules/shared/nix.nix
-    ../../modules/shared/packages.nix
-    ../../modules/shared/fonts.nix
+    ../../modules/shared
     ./hardware/hardware-configuration.nix
     ./hardware/truerng.nix
     ./audio.nix

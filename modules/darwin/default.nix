@@ -1,10 +1,6 @@
 { pkgs, ... }:
 {
-  imports = [
-    ../shared/nix.nix
-    ../shared/packages.nix
-    ../shared/fonts.nix
-  ];
+  imports = [ ../shared ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
 

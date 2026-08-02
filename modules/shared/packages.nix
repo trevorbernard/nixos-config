@@ -8,8 +8,6 @@ let
   cfg = config.my.graphify;
 in
 {
-  imports = [ ./unfree.nix ];
-
   options.my.graphify.withOpenai = lib.mkEnableOption ''
     graphify's OpenAI backend. Pulls in openai and tiktoken, so leave it off
     on hosts with no OpenAI credentials to keep the closure small
