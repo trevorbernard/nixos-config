@@ -56,10 +56,28 @@
         "x86_64-linux"
         "aarch64-darwin"
       ];
-      forEachSystem =
-        f: nixpkgs.lib.genAttrs supportedSystems (system: f nixpkgs.legacyPackages.${system});
+      # Unfree packages reachable from the `packages` output. Kept as an
+      # explicit allowlist rather than `allowUnfree = true` so this entry point
+      # matches the host-side policy in modules/shared/unfree.nix.
+      unfreePackages = [
+        "pencil-cli"
+        "sonarqube-cli"
+      ];
 
-      commonOverlays = [
+      pkgsFor =
+        system:
+        import nixpkgs {
+          inherit system;
+          overlays = [ self.overlays.default ];
+          config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) unfreePackages;
+        };
+
+      forEachSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f (pkgsFor system));
+    in
+    {
+      # Single source of truth for every package this flake adds to nixpkgs, so
+      # hosts and the `packages` output can never define one differently.
+      overlays.default = nixpkgs.lib.composeManyExtensions [
         claude-code-overlay.overlays.default
         (final: _: {
           termcopy = termcopy.packages.${final.stdenv.hostPlatform.system}.default;
@@ -67,16 +85,19 @@
           hunk = hunk.packages.${final.stdenv.hostPlatform.system}.default;
           herdr = herdr.packages.${final.stdenv.hostPlatform.system}.default;
           tuicr = tuicr.packages.${final.stdenv.hostPlatform.system}.default;
+        })
+        (final: _: {
           graphify = final.callPackage ./pkgs/graphify { };
           openspec = final.callPackage ./pkgs/openspec { };
+          pencil-cli = final.callPackage ./pkgs/pencil-cli { };
+          sonarqube-cli = final.callPackage ./pkgs/sonarqube-cli { };
         })
       ];
-    in
-    {
+
       nixosConfigurations.knowhere = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit self; };
         modules = [
-          { nixpkgs.overlays = commonOverlays; }
+          { nixpkgs.overlays = [ self.overlays.default ]; }
           ./hosts/knowhere/default.nix
         ];
       };
@@ -84,7 +105,7 @@
       darwinConfigurations.aypa = nix-darwin.lib.darwinSystem {
         specialArgs = { inherit self; };
         modules = [
-          { nixpkgs.overlays = commonOverlays; }
+          { nixpkgs.overlays = [ self.overlays.default ]; }
           ./hosts/aypa/default.nix
         ];
       };
@@ -92,22 +113,19 @@
       darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
         specialArgs = { inherit self; };
         modules = [
-          { nixpkgs.overlays = commonOverlays; }
+          { nixpkgs.overlays = [ self.overlays.default ]; }
           ./hosts/macbook/default.nix
         ];
       };
 
-      packages.aarch64-darwin =
-        let
-          pkgs = import nixpkgs {
-            system = "aarch64-darwin";
-            config.allowUnfree = true;
-          };
-        in
-        {
-          pencil-cli = pkgs.callPackage ./pkgs/pencil-cli { };
-          sonarqube-cli = pkgs.callPackage ./pkgs/sonarqube-cli { };
-        };
+      # Both are macOS-only binaries, so they are absent on Linux rather than
+      # present-and-unbuildable.
+      packages = forEachSystem (
+        pkgs:
+        nixpkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+          inherit (pkgs) pencil-cli sonarqube-cli;
+        }
+      );
 
       # `nix flake check` builds each host's toplevel on its matching system.
       checks = {

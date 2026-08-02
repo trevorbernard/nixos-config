@@ -9,9 +9,7 @@
 
   my.unfreePackages = [ "pencil-cli" ];
 
-  environment.systemPackages = [
-    (pkgs.callPackage ../../pkgs/pencil-cli { })
-  ];
+  environment.systemPackages = [ pkgs.pencil-cli ];
 
   homebrew.casks = [
     "signal"

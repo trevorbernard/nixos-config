@@ -29,7 +29,7 @@
     awscli2
     neovim
     terraform
-    (callPackage ../../pkgs/sonarqube-cli { })
+    sonarqube-cli
   ];
 
   homebrew = {
