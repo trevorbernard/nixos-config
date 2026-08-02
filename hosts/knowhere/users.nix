@@ -42,6 +42,10 @@ in
     ];
   };
 
+  # This is a passwordless path to root, not a narrow grant: nixos-rebuild
+  # takes --flake, and activating an arbitrary flake runs its activation
+  # script as root. It is here for convenience on a single-user desktop;
+  # anything that can run as tbernard can take the machine.
   security.sudo.extraRules = [
     {
       users = [ "tbernard" ];

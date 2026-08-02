@@ -3,6 +3,12 @@
 # Optimize the Nix store: prune old generations, garbage-collect dead paths,
 # and hard-link identical files to reclaim disk space.
 #
+# On knowhere this overlaps modules/shared/nix.nix, which already runs gc
+# weekly (--delete-older-than 30d) and store optimise weekly. Reach for this
+# when you need it now, want a dry run first, need a shorter cutoff than 30d,
+# or want to sweep user profile generations, which nix.gc does not touch.
+# On the darwin hosts nix.gc is off entirely, so this is the only mechanism.
+#
 # Usage:
 #   ./nix-optimize.sh              # GC dead paths + dedup store
 #   ./nix-optimize.sh --age 14d    # also delete generations older than 14 days
@@ -21,7 +27,7 @@ while [[ $# -gt 0 ]]; do
     --all)     DELETE_ALL=true; shift ;;
     --dry-run) DRY_RUN=true; shift ;;
     -h|--help)
-      grep '^#' "$0" | sed 's/^# \?//'
+      grep '^#' "$0" | grep -v '^#!' | sed 's/^# \?//'
       exit 0 ;;
     *) echo "unknown option: $1" >&2; exit 1 ;;
   esac
