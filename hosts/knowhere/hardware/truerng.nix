@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = [pkgs.rng-tools];
+  environment.systemPackages = [ pkgs.rng-tools ];
 
   # Rules for mounting TrueRNG. https://ubld.it/truerng_v3
   services.udev.extraRules = ''
@@ -11,8 +11,8 @@
 
   systemd.services.rngd = {
     # Clean shutdown without DefaultDependencies
-    conflicts = ["shutdown.target"];
-    wantedBy = ["multi-user.target"];
+    conflicts = [ "shutdown.target" ];
+    wantedBy = [ "multi-user.target" ];
     before = [
       "sysinit.target"
       "shutdown.target"

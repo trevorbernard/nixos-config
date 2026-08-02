@@ -118,6 +118,8 @@
         };
       };
 
-      formatter = forEachSystem (pkgs: pkgs.nixfmt);
+      # nixfmt-tree (treefmt) rather than bare nixfmt: it walks the tree, so
+      # `nix fmt` with no arguments works instead of erroring on stdin.
+      formatter = forEachSystem (pkgs: pkgs.nixfmt-tree);
     };
 }

@@ -9,7 +9,10 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   environment.systemPackages = with pkgs; [
-    (aspellWithDicts (dicts: [ dicts.en dicts.en-computers ]))
+    (aspellWithDicts (dicts: [
+      dicts.en
+      dicts.en-computers
+    ]))
   ];
 
   homebrew = {
