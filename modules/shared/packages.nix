@@ -30,6 +30,7 @@
     termcopy
     tig
     tmux
+    tuicr
     tumbler
     zoxide
   ];

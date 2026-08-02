@@ -31,6 +31,11 @@
       url = "github:ogulcancelik/herdr/v0.7.3";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    tuicr = {
+      url = "github:agavra/tuicr/v0.20.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -43,6 +48,7 @@
       hunk,
       claude-code-overlay,
       herdr,
+      tuicr,
       ...
     }:
     let
@@ -60,6 +66,7 @@
           tumbler = tumbler.packages.${final.stdenv.hostPlatform.system}.default;
           hunk = hunk.packages.${final.stdenv.hostPlatform.system}.default;
           herdr = herdr.packages.${final.stdenv.hostPlatform.system}.default;
+          tuicr = tuicr.packages.${final.stdenv.hostPlatform.system}.default;
           graphify = final.callPackage ./pkgs/graphify { };
           openspec = final.callPackage ./pkgs/openspec { };
         })
