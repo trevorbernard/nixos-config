@@ -11,14 +11,9 @@
     "terraform"
   ];
 
+  my.aspellDicts = [ "en-science" ];
+
   environment.systemPackages = with pkgs; [
-    (aspellWithDicts (
-      dicts: with dicts; [
-        en
-        en-computers
-        en-science
-      ]
-    ))
     bat
     ghostty
     gnome-tweaks

@@ -4,13 +4,6 @@
 
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-  environment.systemPackages = with pkgs; [
-    (aspellWithDicts (dicts: [
-      dicts.en
-      dicts.en-computers
-    ]))
-  ];
-
   homebrew = {
     enable = true;
     onActivation.cleanup = "zap";
