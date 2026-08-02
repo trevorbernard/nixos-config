@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   sshKeys = import ../../modules/shared/ssh-keys.nix;
 in
@@ -13,7 +13,7 @@ in
     group = "git";
     home = "/srv/git";
     createHome = false;
-    shell = "${pkgs.git}/bin/git-shell";
+    shell = lib.getExe' pkgs.git "git-shell";
     description = "Git repository host";
     openssh.authorizedKeys.keys = [
       sshKeys.gmail
