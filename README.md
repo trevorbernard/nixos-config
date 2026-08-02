@@ -9,9 +9,24 @@ flake.
 - **aypa** — macOS (aarch64-darwin) work machine, using nix-darwin
 - **macbook** — macOS (aarch64-darwin) personal machine, using nix-darwin
 
-> **Note:** `macbook` runs [Determinate Nix](https://docs.determinate.systems/),
-> which owns the Nix daemon. Its config sets `nix.enable = false` so nix-darwin
-> doesn't manage Nix on that host.
+## Nix daemon ownership
+
+`macbook` runs [Determinate Nix](https://docs.determinate.systems/), which owns
+the Nix daemon. Its config sets `nix.enable = false` so nix-darwin doesn't
+manage Nix on that host.
+
+The consequence is that **nothing in `modules/shared/nix.nix`'s `nix.settings`
+reaches `macbook`** — nix-darwin writes no Nix configuration at all when
+`nix.enable` is off, and Determinate reads `/etc/nix/nix.custom.conf` instead.
+The settings block is wrapped in `lib.mkIf config.nix.enable` to make that
+explicit. In particular the `ryoppippi.cachix.org` substituter that serves
+`claude-code` is *not* active on `macbook`; to enable it there, add it to
+`/etc/nix/nix.custom.conf` out of band:
+
+```
+extra-substituters = https://ryoppippi.cachix.org
+extra-trusted-public-keys = ryoppippi.cachix.org-1:b2LbtWNvJeL/qb1B6TYOMK+apaCps4SCbzlPRfSQIms=
+```
 
 ## Build Commands
 
