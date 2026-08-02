@@ -22,6 +22,10 @@
     ];
   };
 
+  # Registers the Nix zsh in /etc/shells so it is a valid chsh target, matching
+  # what knowhere does. Without it macOS rejects the shell set just below.
+  environment.shells = [ pkgs.zsh ];
+
   users.users.tbernard = {
     home = "/Users/tbernard";
     shell = pkgs.zsh;
