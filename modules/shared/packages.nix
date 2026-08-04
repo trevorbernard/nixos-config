@@ -46,6 +46,7 @@ in
       tuicr
       tumbler
       zoxide
+      zsh-completions
     ];
   };
 }

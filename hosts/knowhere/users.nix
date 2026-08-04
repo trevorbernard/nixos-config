@@ -5,7 +5,14 @@ in
 {
   users.defaultUserShell = pkgs.zsh;
   environment.shells = [ pkgs.zsh ];
-  programs.zsh.enable = true;
+  # Nested option names are NixOS-only; nix-darwin spells the same two flags
+  # enableAutosuggestions/enableSyntaxHighlighting, so this cannot move into
+  # modules/shared. See modules/darwin/default.nix for the other half.
+  programs.zsh = {
+    enable = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+  };
 
   programs.fzf = {
     keybindings = true;

@@ -26,6 +26,14 @@
   # what knowhere does. Without it macOS rejects the shell set just below.
   environment.shells = [ pkgs.zsh ];
 
+  # programs.zsh.enable already defaults to true here. These are the flat
+  # spellings of the flags knowhere sets as autosuggestions.enable and
+  # syntaxHighlighting.enable; nix-darwin has not adopted the nested form.
+  programs.zsh = {
+    enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
+  };
+
   users.users.tbernard = {
     home = "/Users/tbernard";
     shell = pkgs.zsh;
