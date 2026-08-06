@@ -36,6 +36,14 @@
       url = "github:agavra/tuicr/v0.20.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Fork carrying faint (SGR 2) support, which upstream parses and then
+    # discards. Both ends re-parse and re-emit the escape stream, so the client
+    # and the server both have to carry the patch for faint to survive.
+    mosh = {
+      url = "github:trevorbernard/mosh";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -49,6 +57,7 @@
       claude-code-overlay,
       herdr,
       tuicr,
+      mosh,
       ...
     }:
     let
@@ -85,6 +94,7 @@
           hunk = hunk.packages.${final.stdenv.hostPlatform.system}.default;
           herdr = herdr.packages.${final.stdenv.hostPlatform.system}.default;
           tuicr = tuicr.packages.${final.stdenv.hostPlatform.system}.default;
+          mosh = mosh.packages.${final.stdenv.hostPlatform.system}.default;
         })
         (final: _: {
           graphify = final.callPackage ./pkgs/graphify { };

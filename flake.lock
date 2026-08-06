@@ -143,6 +143,26 @@
         "type": "github"
       }
     },
+    "mosh": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1785981821,
+        "narHash": "sha256-gKdQMKnsaX3uaX9gnvUEic83w4OncbQRCI8ezWioQ74=",
+        "owner": "trevorbernard",
+        "repo": "mosh",
+        "rev": "649c5c23d5483afb3c4a4dd347208906c0bfbd84",
+        "type": "github"
+      },
+      "original": {
+        "owner": "trevorbernard",
+        "repo": "mosh",
+        "type": "github"
+      }
+    },
     "naersk": {
       "inputs": {
         "fenix": "fenix",
@@ -239,6 +259,7 @@
         "claude-code-overlay": "claude-code-overlay",
         "herdr": "herdr",
         "hunk": "hunk",
+        "mosh": "mosh",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs_2",
         "termcopy": "termcopy",
