@@ -100,6 +100,7 @@
           graphify = final.callPackage ./pkgs/graphify { };
           openspec = final.callPackage ./pkgs/openspec { };
           pencil-cli = final.callPackage ./pkgs/pencil-cli { };
+          secretspec = final.callPackage ./pkgs/secretspec { };
           sonarqube-cli = final.callPackage ./pkgs/sonarqube-cli { };
         })
       ];

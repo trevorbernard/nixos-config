@@ -38,6 +38,7 @@ in
       mosh
       nil
       openspec
+      secretspec
       starship
       stow
       termcopy
