@@ -4,6 +4,12 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
+    # atuin 18.19.0 needs rustc >= 1.97 and nixos-26.05 ships 1.95, so the bump
+    # can't be backported there. Pull just atuin from unstable, where Hydra has
+    # already built it; deliberately not following nixpkgs, since that would
+    # drag the too-old rustc back in.
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,6 +56,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
       nix-darwin,
       termcopy,
       tumbler,
@@ -95,6 +102,9 @@
           herdr = herdr.packages.${final.stdenv.hostPlatform.system}.default;
           tuicr = tuicr.packages.${final.stdenv.hostPlatform.system}.default;
           mosh = mosh.packages.${final.stdenv.hostPlatform.system}.default;
+        })
+        (final: _: {
+          atuin = nixpkgs-unstable.legacyPackages.${final.stdenv.hostPlatform.system}.atuin;
         })
         (final: _: {
           graphify = final.callPackage ./pkgs/graphify { };
