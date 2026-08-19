@@ -15,6 +15,7 @@
   environment.systemPackages = with pkgs; [
     _1password-cli
     awscli2
+    azure-cli
     cli-microsoft365
     fabric-cli
     neovim
