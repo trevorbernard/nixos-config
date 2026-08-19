@@ -107,6 +107,8 @@
           atuin = nixpkgs-unstable.legacyPackages.${final.stdenv.hostPlatform.system}.atuin;
         })
         (final: _: {
+          cli-microsoft365 = final.callPackage ./pkgs/cli-microsoft365 { };
+          fabric-cli = final.callPackage ./pkgs/fabric-cli { };
           graphify = final.callPackage ./pkgs/graphify { };
           openspec = final.callPackage ./pkgs/openspec { };
           pencil-cli = final.callPackage ./pkgs/pencil-cli { };
@@ -139,11 +141,14 @@
         ];
       };
 
-      # Both are macOS-only binaries, so they are absent on Linux rather than
-      # present-and-unbuildable.
+      # pencil-cli and sonarqube-cli are macOS-only binaries, so they are absent
+      # on Linux rather than present-and-unbuildable.
       packages = forEachSystem (
         pkgs:
-        nixpkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+        {
+          inherit (pkgs) cli-microsoft365 fabric-cli;
+        }
+        // nixpkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
           inherit (pkgs) pencil-cli sonarqube-cli;
         }
       );

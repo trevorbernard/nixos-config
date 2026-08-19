@@ -15,6 +15,8 @@
   environment.systemPackages = with pkgs; [
     _1password-cli
     awscli2
+    cli-microsoft365
+    fabric-cli
     neovim
     terraform
     sonarqube-cli
