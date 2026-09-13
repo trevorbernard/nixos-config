@@ -110,6 +110,7 @@
           cli-microsoft365 = final.callPackage ./pkgs/cli-microsoft365 { };
           fabric-cli = final.callPackage ./pkgs/fabric-cli { };
           graphify = final.callPackage ./pkgs/graphify { };
+          leaf-markdown-viewer = final.callPackage ./pkgs/leaf-markdown-viewer { };
           openspec = final.callPackage ./pkgs/openspec { };
           pencil-cli = final.callPackage ./pkgs/pencil-cli { };
           secretspec = final.callPackage ./pkgs/secretspec { };
@@ -146,7 +147,7 @@
       packages = forEachSystem (
         pkgs:
         {
-          inherit (pkgs) cli-microsoft365 fabric-cli;
+          inherit (pkgs) cli-microsoft365 fabric-cli leaf-markdown-viewer;
         }
         // nixpkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
           inherit (pkgs) pencil-cli sonarqube-cli;
