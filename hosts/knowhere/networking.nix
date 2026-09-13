@@ -62,7 +62,10 @@
 
   networking.firewall = {
     interfaces."eno1" = {
-      allowedTCPPorts = [ 22 ];
+      allowedTCPPorts = [
+        22
+        8888
+      ];
       allowedUDPPortRanges = [
         {
           from = 60000;
