@@ -32,6 +32,7 @@ in
       herdr
       htop
       hunk
+      leaf-markdown-viewer
       libtool
       magic-wormhole
       mcp-nixos
