@@ -172,11 +172,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769799857,
-        "narHash": "sha256-88IFXZ7Sa1vxbz5pty0Io5qEaMQMMUPMonLa3Ls/ss4=",
+        "lastModified": 1782220280,
+        "narHash": "sha256-thLTFbp9D5Qknmh8q/v4FRpLGphUSijT3E86cbLYTXo=",
         "owner": "nix-community",
         "repo": "naersk",
-        "rev": "9d4ed44d8b8cecdceb1d6fd76e74123d90ae6339",
+        "rev": "9aa07bb0256d300219b30622d2454e85f7f3667e",
         "type": "github"
       },
       "original": {
@@ -447,16 +447,16 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1785683320,
-        "narHash": "sha256-ByeWD4mC1DiH6L971mC7Qv6zUVmaf2lneewK2ZWXxg8=",
+        "lastModified": 1789516366,
+        "narHash": "sha256-eu6+jDsCHLWPqMTSWTgtTr9bFiYYAAPFWfR+5dGgefE=",
         "owner": "agavra",
         "repo": "tuicr",
-        "rev": "8b14bb233ab72774446c21dd31ff8e5c3bc115ce",
+        "rev": "d6441a1886ae0a7bab8515fcbad62b8b6334e32e",
         "type": "github"
       },
       "original": {
         "owner": "agavra",
-        "ref": "v0.20.0",
+        "ref": "v0.26.0",
         "repo": "tuicr",
         "type": "github"
       }
