@@ -18,6 +18,7 @@
     azure-cli
     cli-microsoft365
     fabric-cli
+    knip
     neovim
     terraform
     sonarqube-cli
