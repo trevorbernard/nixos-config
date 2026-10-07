@@ -39,6 +39,7 @@ in
       mosh
       nil
       openspec
+      ripgrep
       secretspec
       starship
       stow

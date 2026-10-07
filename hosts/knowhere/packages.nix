@@ -24,7 +24,6 @@
     nix-output-monitor
     nixfmt
     nvd
-    ripgrep
     terraform
     unzip
     vim
