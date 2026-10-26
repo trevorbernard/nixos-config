@@ -34,6 +34,14 @@
     enableSyntaxHighlighting = true;
   };
 
+  # Rex sets REX_BIN_DIR only inside its own terminals, so the guard keeps an
+  # empty entry out of PATH everywhere else.
+  environment.interactiveShellInit = ''
+    if [ -n "$REX_BIN_DIR" ]; then
+      export PATH="$REX_BIN_DIR:$PATH"
+    fi
+  '';
+
   users.users.tbernard = {
     home = "/Users/tbernard";
     shell = pkgs.zsh;
