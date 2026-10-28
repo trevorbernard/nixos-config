@@ -50,6 +50,14 @@
       url = "github:trevorbernard/mosh";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Pre-release: pkgs.superlogical.com needs the token in /etc/nix/netrc
+    # (machine pkgs.superlogical.com login rex password TOKEN). stable has no
+    # release yet, so track preview.
+    rex = {
+      url = "https://pkgs.superlogical.com/rex/nix/preview.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -65,6 +73,7 @@
       herdr,
       tuicr,
       mosh,
+      rex,
       ...
     }:
     let
@@ -123,6 +132,7 @@
         specialArgs = { inherit self; };
         modules = [
           { nixpkgs.overlays = [ self.overlays.default ]; }
+          rex.nixosModules.default
           ./hosts/knowhere/default.nix
         ];
       };

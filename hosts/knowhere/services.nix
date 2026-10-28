@@ -4,6 +4,15 @@
 
   virtualisation.docker.enable = true;
 
+  # The login server rather than services.rex.enable: the shared server runs
+  # every terminal as the rex system user, while this runs a server per
+  # account as that account.
+  services.rex.loginServer = {
+    enable = true;
+    accounts.tbernard.principals = [ "tailscale:trevor.bernard@gmail.com" ];
+    tailscaleServe.enable = true;
+  };
+
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
