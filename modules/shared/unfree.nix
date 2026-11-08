@@ -13,7 +13,7 @@
 
   config = {
     # Allowed on every host (installed via modules/shared/packages.nix).
-    my.unfreePackages = [ "claude-code" ];
+    my.unfreePackages = [ "claude" ];
 
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.my.unfreePackages;
   };
