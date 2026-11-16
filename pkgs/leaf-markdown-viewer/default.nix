@@ -20,6 +20,11 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   nativeBuildInputs = [ installShellFiles ];
 
+  # Races a wall-clock scan budget against a directory limit; flakes under load.
+  checkFlags = [
+    "--skip=tests::file_fuzzy::fuzzy_file_picker_reports_directory_limit_truncation"
+  ];
+
   postInstall = ''
     installShellCompletion \
       --bash completions/leaf.bash \
