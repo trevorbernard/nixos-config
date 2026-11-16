@@ -36,7 +36,6 @@ in
       libtool
       magic-wormhole
       mcp-nixos
-      mosh
       nil
       openspec
       ripgrep

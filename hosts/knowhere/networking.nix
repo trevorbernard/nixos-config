@@ -66,12 +66,6 @@
         22
         8888
       ];
-      allowedUDPPortRanges = [
-        {
-          from = 60000;
-          to = 61000;
-        }
-      ];
     };
     interfaces."tailscale0" = {
       allowedTCPPorts = [
@@ -81,12 +75,6 @@
       allowedUDPPorts = [
         22000
         21027
-      ];
-      allowedUDPPortRanges = [
-        {
-          from = 60000;
-          to = 61000;
-        }
       ];
     };
   };
