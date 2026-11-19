@@ -43,52 +43,49 @@ sudo nixos-rebuild switch --flake '.#knowhere'
 darwin-rebuild switch --flake '.#aypa'
 darwin-rebuild switch --flake '.#macbook'
 
-# build a custom package standalone (darwin only)
+# build a custom package standalone (`nix flake show` lists them;
+# pencil-cli and sonarqube-cli are darwin only)
+nix build '.#knip'
 nix build '.#pencil-cli'
-nix build '.#sonarqube-cli'
+
+# build this system's host toplevels and packages, plus a formatting gate
+nix flake check
 
 # format the tree
 nix fmt
 ```
 
-## Structure
+## Prerequisites
+
+The `rex` input (used by `knowhere`) is fetched from `pkgs.superlogical.com`,
+which requires a token in `/etc/nix/netrc`:
 
 ```
-├── flake.nix                  # single root flake; defines all hosts + packages
-├── hosts/
-│   ├── knowhere/              # NixOS desktop
-│   │   ├── default.nix        # imports, bootloader, hostname, locale
-│   │   ├── audio.nix          # PipeWire
-│   │   ├── desktop.nix        # GNOME/Wayland, NVIDIA, fonts, dconf
-│   │   ├── git-server.nix     # git-shell user, Tailscale-only SSH access
-│   │   ├── networking.nix     # NetworkManager, Tailscale, Syncthing, firewall
-│   │   ├── packages.nix       # host system packages + unfree allowlist
-│   │   ├── services.nix       # ssh, docker, printing, gnupg, sleep targets
-│   │   ├── users.nix          # tbernard user, shell, sudo rules
-│   │   └── hardware/          # hardware-configuration.nix, truerng.nix
-│   ├── aypa/                  # macOS work machine
-│   │   └── default.nix
-│   └── macbook/               # macOS personal machine (Determinate Nix)
-│       └── default.nix
-├── modules/
-│   ├── darwin/
-│   │   └── default.nix        # shared nix-darwin base (homebrew, user, fonts)
-│   └── shared/
-│       ├── nix.nix            # nix daemon settings, substituters, gc/optimise
-│       ├── packages.nix       # CLI packages present on every machine
-│       ├── unfree.nix         # my.unfreePackages option + allowUnfree predicate
-│       └── fonts.nix          # fonts shared across hosts
-└── pkgs/
-    ├── pencil-cli/            # Pencil AI design-file CLI (npm, darwin)
-    └── sonarqube-cli/         # SonarQube CLI (prebuilt binary, darwin)
+machine pkgs.superlogical.com login rex password TOKEN
 ```
 
-## Unfree packages
+## Layout
 
-Unfree packages are gated per-host rather than via a blanket `allowUnfree`.
-`modules/shared/unfree.nix` exposes a `my.unfreePackages` list option (seeded with
-a shared base) and builds the `allowUnfreePredicate` once; each host appends its
-own package names, and the module system merges the lists.
+- `hosts/<name>/` — one directory per machine; `default.nix` is the entry point
+  referenced from `flake.nix`.
+- `modules/shared/` — imported by every host, NixOS and nix-darwin alike.
+- `modules/darwin/` — base for both Macs; imports `modules/shared`.
+- `pkgs/<name>/` — local derivations, all routed through `overlays.default` in
+  `flake.nix`, which the hosts and the `packages` output both consume.
+- `scripts/` — manual maintenance helpers.
+
+## Per-host options
+
+Shared modules define a base and expose `my.*` options that hosts extend; list
+options merge across modules.
+
+- `my.unfreePackages` — unfree packages are gated per-host rather than via a
+  blanket `allowUnfree`. `modules/shared/unfree.nix` seeds a shared base and
+  builds the `allowUnfreePredicate` once; each host appends its own names.
+- `my.aspellDicts` — dictionaries for the single shared aspell wrapper, which
+  can't be extended after it is built.
+- `my.graphify.withOpenai` — enables graphify's OpenAI backend; off by default
+  to keep the closure small.
 
 ## License
 

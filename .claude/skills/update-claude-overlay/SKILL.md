@@ -6,7 +6,7 @@ description: Use when asked to update Claude Code, bump the claude-code overlay,
 # Update Claude Code Overlay
 
 Claude Code comes from the `claude-code-overlay` flake input
-(github:ryoppippi/claude-code-overlay), applied in `commonOverlays` in
+(github:ryoppippi/claude-code-overlay), composed into `overlays.default` in
 flake.nix. Updating means bumping that input's entry in flake.lock.
 
 ## Steps
@@ -43,15 +43,15 @@ flake.nix. Updating means bumping that input's entry in flake.lock.
    First run may fetch ~300 MiB of build deps and compile from source — this
    is the same build `switch` would do, so it isn't wasted.
 
-4. Commit only flake.lock and push to main directly (no PR):
+4. Commit only flake.lock:
 
    ```bash
    git add flake.lock
    git commit -m "chore: update claude-code overlay to $version"
-   git push
    ```
 
-   No Claude attribution lines in the commit message.
+   No Claude attribution lines in the commit message. Stop here and report
+   the commit; push (to main directly, no PR) only when the user says to.
 
 5. Applying it (`darwin-rebuild switch` / `nixos-rebuild switch`) is separate —
    only do it if explicitly asked.
