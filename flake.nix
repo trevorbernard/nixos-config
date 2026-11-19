@@ -158,8 +158,11 @@
           inherit (pkgs)
             cli-microsoft365
             fabric-cli
+            graphify
             knip
             leaf-markdown-viewer
+            openspec
+            secretspec
             ;
         }
         // nixpkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
