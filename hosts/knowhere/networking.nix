@@ -39,9 +39,9 @@
           id = "7PT5A4B-MT3KS5N-VDEC76N-JNXHXYY-UA2AIH5-SMM7G4P-2VU74IS-V3USRAG";
           addresses = [ "tcp://trevors-macbook-pro.tailb5107e.ts.net:22000" ];
         };
-        "iphone-14-pro-max" = {
-          id = "U4P5FMV-77L2A5M-YIA6FQX-LWTZZUL-TKHZ5TT-CUATEER-ILOWE3U-YHBS5QB";
-          addresses = [ "tcp://iphone-14-pro-max.tailb5107e.ts.net:22000" ];
+        "iphone-18-pro" = {
+          id = "VRCXI2C-WBIJQHJ-LILULJR-O3X56H4-I32PUIQ-ZWJS7HC-APCEOT2-AJT4SAY";
+          addresses = [ "tcp://iphone-18-pro.tailb5107e.ts.net:22000" ];
         };
       };
       folders = {
@@ -49,7 +49,7 @@
           path = "/home/tbernard/Sync/keepass";
           devices = [
             "trevors-macbook-pro"
-            "iphone-14-pro-max"
+            "iphone-18-pro"
           ];
         };
         "documents" = {
