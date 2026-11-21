@@ -26,7 +26,7 @@
     <logicalmonitor>
       <x>0</x>
       <y>0</y>
-      <scale>1</scale>
+      <scale>1.5</scale>
       <primary>yes</primary>
       <monitor>
         <monitorspec>

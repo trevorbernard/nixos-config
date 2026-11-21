@@ -71,5 +71,10 @@
   services.desktopManager.gnome.extraGSettingsOverrides = ''
     [org.gnome.desktop.interface]
     gtk-key-theme='Emacs'
+
+    # Fractional scales in monitors.xml only apply in logical layout mode,
+    # which the greeter doesn't get without scale-monitor-framebuffer.
+    [org.gnome.mutter]
+    experimental-features=['scale-monitor-framebuffer', 'xwayland-native-scaling']
   '';
 }
