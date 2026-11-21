@@ -26,7 +26,7 @@
     };
 
     hunk = {
-      url = "github:modem-dev/hunk/v0.17.0";
+      url = "github:modem-dev/hunk/v0.25.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
