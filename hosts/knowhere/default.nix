@@ -19,6 +19,11 @@
 
   networking.hostName = "knowhere";
 
+  # The flake pins nixpkgs; `nix-shell -p` and `<nixpkgs>` still resolve to it
+  # through the nix-path setting, so the root channel is only a stale second
+  # source of truth.
+  nix.channel.enable = false;
+
   time.timeZone = "America/Toronto";
   i18n.defaultLocale = "en_CA.UTF-8";
 
