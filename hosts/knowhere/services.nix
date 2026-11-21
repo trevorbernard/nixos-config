@@ -17,6 +17,9 @@
     enable = true;
     enableSSHSupport = true;
   };
+  # GNOME enables its own SSH agent by default, and both export
+  # SSH_AUTH_SOCK; without this, which one wins depends on init order.
+  services.gnome.gcr-ssh-agent.enable = false;
 
   services.openssh = {
     enable = true;
