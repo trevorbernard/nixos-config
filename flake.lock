@@ -434,16 +434,16 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1789516366,
-        "narHash": "sha256-eu6+jDsCHLWPqMTSWTgtTr9bFiYYAAPFWfR+5dGgefE=",
+        "lastModified": 1794680212,
+        "narHash": "sha256-cCauvjBAwMC3r4OqLObDJ1DtVNEcmMB+6A1UFadEMVY=",
         "owner": "agavra",
         "repo": "tuicr",
-        "rev": "d6441a1886ae0a7bab8515fcbad62b8b6334e32e",
+        "rev": "a8185f2c701ed213c8407b8bda79dd6487d302ec",
         "type": "github"
       },
       "original": {
         "owner": "agavra",
-        "ref": "v0.26.0",
+        "ref": "v0.29.0",
         "repo": "tuicr",
         "type": "github"
       }

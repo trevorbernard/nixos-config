@@ -41,7 +41,7 @@
     };
 
     tuicr = {
-      url = "github:agavra/tuicr/v0.26.0";
+      url = "github:agavra/tuicr/v0.29.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
