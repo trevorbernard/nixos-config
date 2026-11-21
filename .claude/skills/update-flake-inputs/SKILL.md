@@ -1,11 +1,12 @@
 ---
 name: update-flake-inputs
-description: Use when asked to update, bump, or check for new releases of a tag-pinned flake input (termcopy, tumbler, hunk, herdr, tuicr) or of rex in this repo.
+description: Use when asked to update, bump, or check for new releases of a tag-pinned flake input (termcopy, tumbler, hunk, herdr, tuicr), of rex, or of nix-index-database (the comma / nix-locate package index) in this repo.
 ---
 
 # Update Flake Inputs
 
-Covers the inputs a bare `nix flake update` cannot move, plus rex.
+Covers the inputs a bare `nix flake update` cannot move, plus rex and
+nix-index-database.
 
 | Input | Source | Pinned by |
 |---|---|---|
@@ -14,6 +15,7 @@ Covers the inputs a bare `nix flake update` cannot move, plus rex.
 | herdr | github:ogulcancelik/herdr | release tag in the flake.nix URL |
 | tuicr | github:agavra/tuicr | release tag in the flake.nix URL |
 | rex | pkgs.superlogical.com | `preview` channel tarball |
+| nix-index-database | github:nix-community/nix-index-database | default branch; upstream has no tags |
 
 Not covered here:
 
@@ -105,6 +107,41 @@ Fetching it needs the token in `/etc/nix/netrc` (README, "Prerequisites").
 
    If the superlogical MCP server is available, its "Server & CLI" changelog
    says what changed; include a one-line summary in the report.
+
+## nix-index-database
+
+The prebuilt package index behind `comma` and the missing-command hook on
+knowhere. Upstream regenerates it weekly and publishes no tags, so there is no
+version to edit; the lock entry just moves to the newest commit. Left alone it
+drifts from nixpkgs and starts suggesting packages that have since changed.
+
+1. Update and compare:
+
+   ```bash
+   rev() { jq -r '.nodes."nix-index-database".locked.rev' flake.lock; }
+   old=$(rev)
+   nix flake update nix-index-database
+   new=$(rev)
+   day=$(date -d "@$(jq -r '.nodes."nix-index-database".locked.lastModified' flake.lock)" +%F)
+   ```
+
+   If `$new` equals `$old`, report "nix-index-database is still at <day>" and
+   stop; there is nothing to commit.
+
+2. Only knowhere uses it, so build that system and look one command up in the
+   new index. On a Mac, evaluate the system instead, as for rex.
+
+   ```bash
+   out=$(nix build --no-link --print-out-paths '.#nixosConfigurations.knowhere.config.system.build.toplevel')
+   "$out/sw/bin/nix-locate" --minimal --at-root --whole-name /bin/figlet   # expect figlet.out
+   ```
+
+3. Commit only flake.lock, using the date as the version:
+
+   ```bash
+   git add flake.lock
+   git commit -m "chore: update nix-index-database to <day>"
+   ```
 
 ## Finishing
 
