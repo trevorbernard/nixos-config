@@ -108,19 +108,10 @@ nix-update cannot detect the latest version for these two (crates.io via
 $NU --flake <name> --version <version>
 ```
 
-secretspec has a second hash, for the `bw-shim.sh` test fixture fetched from
-the tagged source tree. Refresh it by hand:
-
-```bash
-nix store prefetch-file --json \
-  https://raw.githubusercontent.com/cachix/secretspec/v<version>/tests/fixtures/bw-shim.sh \
-  | jq -r .hash
-```
-
-A 404 means the fixture moved or was removed upstream (it is gone as of
-v0.21.1); look at the upstream `tests/` tree and adjust or drop the
-`postPatch` accordingly. Also check whether the skipped sops test in
-`checkFlags` still needs skipping.
+secretspec runs a large test suite during the build, which takes several
+minutes and shells out to `git`, `jq` and `sops` (`nativeCheckInputs`). A new
+release that calls another tool fails with "No such file or directory"; add
+the tool there.
 
 fabric-cli depends on `fabric-cicd`, packaged next to it in
 `pkgs/fabric-cli/fabric-cicd.nix`. Check what the new release requires:
@@ -170,6 +161,14 @@ out=$(nix build --no-link --print-out-paths ".#<name>")
   nixos-26.05 ships. Do not pull the package from unstable on your own.
   Revert with `git checkout pkgs/<name>`, report the error, and let the user
   decide.
+- A test that fails only because of the build sandbox gets a `--skip` in
+  `checkFlags`, or an environment fix in `preCheck`, with a comment saying
+  why. Seen so far: tests that need the source to be a git checkout, and
+  tests comparing plain text against output that is coloured because Nix
+  runs builders on a pty (`NO_COLOR=1`).
+- A new native npm addon compiles from source, since the sandbox has no
+  network for prebuilt binaries; give it its build inputs (cli-microsoft365's
+  keytar needs `pkg-config` and `libsecret`).
 - For anything else, fix the derivation if the cause is clear (a renamed
   test, a new dependency), and say what changed. Otherwise revert and report.
 
