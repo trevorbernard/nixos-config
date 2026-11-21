@@ -20,6 +20,11 @@
     flake = "/home/tbernard/code/nixos-config";
   };
 
+  # `, cmd` runs a command from nixpkgs without installing it. The module (see
+  # flake.nix) also turns on nix-index, whose shell hook names the package
+  # that provides a missing command.
+  programs.nix-index-database.comma.enable = true;
+
   environment.systemPackages = with pkgs; [
     bat
     ghostty

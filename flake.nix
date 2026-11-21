@@ -52,6 +52,14 @@
       url = "https://pkgs.superlogical.com/rex/nix/preview.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Prebuilt nix-index database for comma and the command-not-found hook.
+    # Regenerated weekly upstream with no release tags, so it tracks the
+    # default branch.
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -67,6 +75,7 @@
       herdr,
       tuicr,
       rex,
+      nix-index-database,
       ...
     }:
     let
@@ -132,6 +141,7 @@
         modules = [
           { nixpkgs.overlays = [ self.overlays.default ]; }
           rex.nixosModules.default
+          nix-index-database.nixosModules.default
           ./hosts/knowhere/default.nix
         ];
       };

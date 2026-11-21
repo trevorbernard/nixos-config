@@ -33,6 +33,12 @@
 
   services.desktopManager.gnome.enable = true;
 
+  # Brave and Ghostty replace these.
+  environment.gnome.excludePackages = with pkgs; [
+    epiphany
+    gnome-console
+  ];
+
   hardware.graphics.enable = true;
 
   hardware.nvidia = {
