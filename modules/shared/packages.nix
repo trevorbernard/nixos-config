@@ -18,6 +18,8 @@ in
     # NixOS and nix-darwin, so it replaces the bare direnv/nix-direnv packages.
     programs.direnv.enable = true;
 
+    environment.variables.EDITOR = "emacs";
+
     environment.systemPackages = with pkgs; [
       atuin
       clang

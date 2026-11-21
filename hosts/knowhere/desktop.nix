@@ -6,13 +6,11 @@
 }:
 {
   environment.variables = {
-    GDK_SCALE = "1";
-    GDK_DPI_SCALE = "1";
-    QT_QPA_PLATFORM = "wayland";
-    GDK_BACKEND = "wayland";
+    # Wayland first, falling back to XWayland for apps that only speak X11.
+    QT_QPA_PLATFORM = "wayland;xcb";
+    GDK_BACKEND = "wayland,x11";
     GTK_IM_MODULE = "none";
     COLORTERM = "truecolor";
-    EDITOR = "emacs";
   };
 
   # Input lag in emacs without this
@@ -22,7 +20,6 @@
 
   services.xserver = {
     enable = true;
-    dpi = 144;
     videoDrivers = [ "nvidia" ];
     xkb.layout = "us";
   };
