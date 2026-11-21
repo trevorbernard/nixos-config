@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 {
   services.printing.enable = true;
 
@@ -8,6 +8,10 @@
     enable = true;
     setSocketVariable = true;
   };
+  # The unit is installed for every user, so it also starts in the GDM
+  # greeter's session, where it has no subuid range and crash-loops. mkForce
+  # because the module already sets "!root", which this implies.
+  systemd.user.services.docker.unitConfig.ConditionUser = lib.mkForce "tbernard";
 
   # The login server rather than services.rex.enable: the shared server runs
   # every terminal as the rex system user, while this runs a server per
