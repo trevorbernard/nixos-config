@@ -2,7 +2,12 @@
 {
   services.printing.enable = true;
 
-  virtualisation.docker.enable = true;
+  # Rootless: the daemon runs as the invoking user, so there is no
+  # root-equivalent docker group and published ports stay behind the firewall.
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
 
   # The login server rather than services.rex.enable: the shared server runs
   # every terminal as the rex system user, while this runs a server per

@@ -28,7 +28,6 @@ in
     extraGroups = [
       "networkmanager"
       "wheel"
-      "docker"
     ];
     openssh.authorizedKeys.keys = [
       sshKeys.gmail
