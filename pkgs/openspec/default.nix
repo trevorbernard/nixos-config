@@ -2,45 +2,39 @@
   lib,
   buildNpmPackage,
   fetchurl,
-  runCommand,
 }:
 
-let
-  versionData = builtins.fromJSON (builtins.readFile ./hashes.json);
-  inherit (versionData) version sourceHash npmDepsHash;
-
-  # The npmjs tarball doesn't ship package-lock.json (npm strips it on
-  # publish), so inject a vendored lockfile before buildNpmPackage runs.
-  srcWithLock = runCommand "openspec-src-with-lock" { } ''
-    mkdir -p $out
-    tar -xzf ${
-      fetchurl {
-        url = "https://registry.npmjs.org/@fission-ai/openspec/" + "-/openspec-${version}.tgz";
-        hash = sourceHash;
-      }
-    } -C $out --strip-components=1
-    cp ${./package-lock.json} $out/package-lock.json
-  '';
-in
-buildNpmPackage {
+buildNpmPackage (finalAttrs: {
   npmDepsFetcherVersion = 2;
   pname = "openspec";
-  inherit version npmDepsHash;
+  version = "1.6.0";
 
-  src = srcWithLock;
-  makeCacheWritable = true;
+  src = fetchurl {
+    url = "https://registry.npmjs.org/@fission-ai/openspec/-/openspec-${finalAttrs.version}.tgz";
+    hash = "sha256-qAR3dn6Ypi6VZGStCaRLKMrMT8v94jdl97S6WY7hOFk=";
+  };
 
-  # The published tarball is prebuilt; we only install + wrap.
+  # The npmjs tarball doesn't ship package-lock.json (npm strips it on
+  # publish), so substitute a vendored lockfile.
+  postPatch = ''
+    cp ${./package-lock.json} package-lock.json
+  '';
+
+  npmDepsHash = "sha256-tMBlolxvW0gvivlMy6kOJ2QdEdPCmR6C787zc8oWmlA=";
+
+  npmFlags = [ "--omit=dev" ];
+
+  # The published tarball ships a prebuilt dist/; we only install + wrap.
   dontNpmBuild = true;
 
   meta = {
     description = "Spec-driven development workflow for AI coding assistants";
     homepage = "https://github.com/Fission-AI/OpenSpec";
-    changelog = "https://github.com/Fission-AI/OpenSpec/releases/tag/v${version}";
+    changelog = "https://github.com/Fission-AI/OpenSpec/releases/tag/v${finalAttrs.version}";
     downloadPage = "https://www.npmjs.com/package/@fission-ai/openspec";
     license = lib.licenses.mit;
     sourceProvenance = with lib.sourceTypes; [ binaryBytecode ];
     platforms = lib.platforms.all;
     mainProgram = "openspec";
   };
-}
+})
