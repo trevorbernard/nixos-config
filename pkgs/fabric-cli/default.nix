@@ -9,7 +9,7 @@ let
 in
 python3.pkgs.buildPythonApplication rec {
   pname = "ms-fabric-cli";
-  version = "1.7.0";
+  version = "1.9.0";
   format = "wheel";
 
   # Only a wheel is published to PyPI; there is no sdist to build from.
@@ -18,7 +18,7 @@ python3.pkgs.buildPythonApplication rec {
     pname = "ms_fabric_cli";
     dist = "py3";
     python = "py3";
-    hash = "sha256-lS7UnUbgAQfnVWh0avYsCimZJsFJkOphfnuDtanYupk=";
+    hash = "sha256-XLIN4yY7Rwih8nb+EgPYZK8Aqyc/3dvFpEcOiItfxzE=";
   };
 
   # pyyaml and psutil are pinned to exact versions upstream; nixpkgs carries
