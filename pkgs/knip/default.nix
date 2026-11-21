@@ -7,11 +7,11 @@
 buildNpmPackage (finalAttrs: {
   npmDepsFetcherVersion = 2;
   pname = "knip";
-  version = "6.40.0";
+  version = "6.47.0";
 
   src = fetchurl {
     url = "https://registry.npmjs.org/knip/-/knip-${finalAttrs.version}.tgz";
-    hash = "sha256-SdQZvlapIuuviUQ4gW3fzZyC/g0P6OeY23nNwyBRCv4=";
+    hash = "sha256-BmL6O/XxE9napKwx6gYsX51Jo5zd+FF98X4jlBL2u6g=";
   };
 
   # The npmjs tarball doesn't ship package-lock.json (npm strips it on
@@ -20,7 +20,7 @@ buildNpmPackage (finalAttrs: {
     cp ${./package-lock.json} package-lock.json
   '';
 
-  npmDepsHash = "sha256-Gq32fFfSxqA17Lzr6DZ/rOZtOKSLIjIJQiJ83wNwLVY=";
+  npmDepsHash = "sha256-Oj1hPoW6KCifFMoPQ98Cb43OLtDeQgYeKt+mUR80Gg0=";
 
   npmFlags = [ "--omit=dev" ];
 
