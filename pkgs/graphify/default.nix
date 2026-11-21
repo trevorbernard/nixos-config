@@ -11,20 +11,28 @@ let
 in
 python3Packages.buildPythonApplication rec {
   pname = "graphifyy";
-  version = "0.8.35";
+  version = "0.9.114";
   pyproject = true;
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-pKzZLH27mT0bBv40hoDywrtrjlDuc2ENuHqS6zviYc4=";
+    hash = "sha256-aetctgYZg/fIrSyG3aCg5H4wX41WWk+C50TzOuv7UzM=";
   };
+
+  # nixos-26.05 ships setuptools 80; the >=83 floor is not needed to build
+  # (the PEP 639 license fields it uses work from 77).
+  postPatch = ''
+    substituteInPlace pyproject.toml \
+      --replace-fail '"setuptools>=83.0.0"' '"setuptools"'
+  '';
 
   build-system = [ python3Packages.setuptools ];
 
   dependencies =
     (with python3Packages; [
       networkx
-      datasketch
+      numpy
+      pyyaml
       rapidfuzz
       tree-sitter
       tree-sitter-python
@@ -75,8 +83,8 @@ python3Packages.buildPythonApplication rec {
 
   meta = {
     description = "Turn any folder of code, docs, papers, and images into a queryable knowledge graph";
-    homepage = "https://github.com/safishamsi/graphify";
-    license = lib.licenses.mit;
+    homepage = "https://github.com/Graphify-Labs/graphify";
+    license = lib.licenses.asl20;
     mainProgram = "graphify";
   };
 }
