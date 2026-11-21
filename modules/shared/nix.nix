@@ -23,15 +23,22 @@
     ];
   };
 
-  nix.gc = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
-    automatic = true;
-    persistent = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
-  };
+  # Weekly gc and store optimise on every host that owns its daemon, so not
+  # macbook. The schedule is spelled per platform: systemd `dates` on NixOS,
+  # while nix-darwin's launchd `interval` already defaults to weekly.
+  nix.gc = lib.mkMerge [
+    (lib.mkIf config.nix.enable {
+      automatic = true;
+      options = "--delete-older-than 30d";
+    })
+    (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      persistent = true;
+      dates = "weekly";
+    })
+  ];
 
-  nix.optimise = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
-    automatic = true;
-    dates = [ "weekly" ];
-  };
+  nix.optimise = lib.mkMerge [
+    (lib.mkIf config.nix.enable { automatic = true; })
+    (lib.mkIf pkgs.stdenv.hostPlatform.isLinux { dates = [ "weekly" ]; })
+  ];
 }

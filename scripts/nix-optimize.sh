@@ -3,11 +3,12 @@
 # Optimize the Nix store: prune old generations, garbage-collect dead paths,
 # and hard-link identical files to reclaim disk space.
 #
-# On knowhere this overlaps modules/shared/nix.nix, which already runs gc
-# weekly (--delete-older-than 30d) and store optimise weekly. Reach for this
-# when you need it now, want a dry run first, need a shorter cutoff than 30d,
-# or want to sweep user profile generations, which nix.gc does not touch.
-# On the darwin hosts nix.gc is off entirely, so this is the only mechanism.
+# On knowhere and aypa this overlaps modules/shared/nix.nix, which already
+# runs gc weekly (--delete-older-than 30d) and store optimise weekly. Reach
+# for this when you need it now, want a dry run first, need a shorter cutoff
+# than 30d, or want to sweep user profile generations, which nix.gc does not
+# touch. On macbook Determinate Nix owns the daemon and nothing is scheduled
+# from this repo, so this is the only mechanism configured here.
 #
 # Usage:
 #   ./nix-optimize.sh              # GC dead paths + dedup store
