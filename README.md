@@ -40,6 +40,7 @@ darwin-rebuild build --flake '.#macbook'
 
 # build and activate
 sudo nixos-rebuild switch --flake '.#knowhere'
+nh os switch                      # knowhere only; same thing from any directory
 darwin-rebuild switch --flake '.#aypa'
 darwin-rebuild switch --flake '.#macbook'
 

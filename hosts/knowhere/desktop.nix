@@ -65,13 +65,48 @@
             };
           };
       }
+      # Unlocked: these are defaults, so Settings and Tweaks can still
+      # override them per user.
+      {
+        settings = {
+          "org/gnome/desktop/interface" = {
+            color-scheme = "prefer-dark";
+            # adw-gtk3 itself is installed in users.nix.
+            gtk-theme = "adw-gtk3-dark";
+            gtk-key-theme = "Emacs";
+            monospace-font-name = "Fira Code 12 @wght=400";
+            font-antialiasing = "rgba";
+            font-hinting = "full";
+            clock-format = "12h";
+          };
+          "org/gnome/desktop/wm/preferences" = {
+            button-layout = "appmenu:minimize,maximize,close";
+          };
+          "org/gnome/desktop/input-sources" = {
+            xkb-options = [
+              "terminate:ctrl_alt_bksp"
+              "caps:ctrl_modifier"
+            ];
+          };
+          "org/gnome/shell" = {
+            enabled-extensions = [
+              "system-monitor@gnome-shell-extensions.gcampax.github.com"
+              "apps-menu@gnome-shell-extensions.gcampax.github.com"
+            ];
+          };
+          # Sleep targets are masked in services.nix; this stops GNOME from
+          # trying anyway.
+          "org/gnome/settings-daemon/plugins/power" = {
+            sleep-inactive-ac-type = "nothing";
+          };
+        };
+      }
     ];
   };
 
+  # Only settings the GDM greeter must also see belong here; it doesn't read
+  # the user dconf profile above.
   services.desktopManager.gnome.extraGSettingsOverrides = ''
-    [org.gnome.desktop.interface]
-    gtk-key-theme='Emacs'
-
     # Fractional scales in monitors.xml only apply in logical layout mode,
     # which the greeter doesn't get without scale-monitor-framebuffer.
     [org.gnome.mutter]

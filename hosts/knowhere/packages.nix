@@ -13,13 +13,19 @@
 
   my.aspellDicts = [ "en-science" ];
 
+  # Sets NH_FLAKE, so `nh os switch` works from any directory. nh.clean stays
+  # off: modules/shared/nix.nix already schedules nix.gc.
+  programs.nh = {
+    enable = true;
+    flake = "/home/tbernard/code/nixos-config";
+  };
+
   environment.systemPackages = with pkgs; [
     bat
     ghostty
     gnome-tweaks
     gnumake
     jq
-    nh
     nix-output-monitor
     nixfmt
     nvd
