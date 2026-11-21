@@ -48,5 +48,12 @@
   };
   system.primaryUser = "tbernard";
 
+  # reattach makes Touch ID reachable from inside tmux, whose sessions are
+  # otherwise detached from the GUI login that owns the sensor.
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    reattach = true;
+  };
+
   system.stateVersion = 6;
 }
