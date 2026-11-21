@@ -12,6 +12,7 @@
   environment.systemPackages = [ pkgs.pencil-cli ];
 
   homebrew.casks = [
+    "discord"
     "signal"
     "slack"
     "syncthing-app"
