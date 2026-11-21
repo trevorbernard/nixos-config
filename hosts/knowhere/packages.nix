@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   my.unfreePackages = [
-    "amazon-q-cli"
     "aspell-dict-en-science"
     "brave"
     "nvidia-kernel-modules"

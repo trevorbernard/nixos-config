@@ -5,7 +5,6 @@
   services.pipewire = {
     enable = true;
     alsa.enable = true;
-    alsa.support32Bit = true;
     pulse.enable = true;
     # module-x11-bell segfaults in its X IO-error handler whenever Xwayland
     # exits, so every logout and greeter teardown left a pipewire coredump.

@@ -1,27 +1,5 @@
 <monitors version="2">
   <configuration>
-    <layoutmode>physical</layoutmode>
-    <logicalmonitor>
-      <x>0</x>
-      <y>0</y>
-      <scale>1</scale>
-      <primary>yes</primary>
-      <monitor>
-        <monitorspec>
-          <connector>DP-2</connector>
-          <vendor>DEL</vendor>
-          <product>DELL P2723QE</product>
-          <serial>F5FPB14</serial>
-        </monitorspec>
-        <mode>
-          <width>3840</width>
-          <height>2160</height>
-          <rate>59.997</rate>
-        </mode>
-      </monitor>
-    </logicalmonitor>
-  </configuration>
-  <configuration>
     <layoutmode>logical</layoutmode>
     <logicalmonitor>
       <x>0</x>
@@ -39,50 +17,6 @@
           <width>3840</width>
           <height>2160</height>
           <rate>59.997</rate>
-        </mode>
-      </monitor>
-    </logicalmonitor>
-  </configuration>
-  <configuration>
-    <layoutmode>physical</layoutmode>
-    <logicalmonitor>
-      <x>0</x>
-      <y>0</y>
-      <scale>2</scale>
-      <primary>yes</primary>
-      <monitor>
-        <monitorspec>
-          <connector>DP-1</connector>
-          <vendor>DEL</vendor>
-          <product>DELL P2723QE</product>
-          <serial>F5FPB14</serial>
-        </monitorspec>
-        <mode>
-          <width>3840</width>
-          <height>2160</height>
-          <rate>59.997</rate>
-        </mode>
-      </monitor>
-    </logicalmonitor>
-  </configuration>
-  <configuration>
-    <layoutmode>physical</layoutmode>
-    <logicalmonitor>
-      <x>0</x>
-      <y>0</y>
-      <scale>1</scale>
-      <primary>yes</primary>
-      <monitor>
-        <monitorspec>
-          <connector>DP-1</connector>
-          <vendor>DEL</vendor>
-          <product>DELL E2316H</product>
-          <serial>X0Y40699C8FI</serial>
-        </monitorspec>
-        <mode>
-          <width>1920</width>
-          <height>1080</height>
-          <rate>60.000</rate>
         </mode>
       </monitor>
     </logicalmonitor>

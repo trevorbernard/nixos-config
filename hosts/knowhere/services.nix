@@ -43,11 +43,6 @@
     };
   };
 
-  services.logind.settings.Login = {
-    IdleAction = "ignore";
-    IdleActionSec = 0;
-  };
-
   systemd.targets.sleep.enable = false;
   systemd.targets.suspend.enable = false;
   systemd.targets.hibernate.enable = false;

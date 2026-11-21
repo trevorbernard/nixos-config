@@ -4,7 +4,6 @@ let
 in
 {
   users.defaultUserShell = pkgs.zsh;
-  environment.shells = [ pkgs.zsh ];
   # Nested option names are NixOS-only; nix-darwin spells the same two flags
   # enableAutosuggestions/enableSyntaxHighlighting, so this cannot move into
   # modules/shared. See modules/darwin/default.nix for the other half.
@@ -23,7 +22,6 @@ in
 
   users.users.tbernard = {
     isNormalUser = true;
-    shell = pkgs.zsh;
     description = "Trevor Bernard";
     extraGroups = [
       "networkmanager"
@@ -36,7 +34,6 @@ in
     ];
     packages = with pkgs; [
       adw-gtk3
-      amazon-q-cli
       awscli2
       brave
       git-filter-repo

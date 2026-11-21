@@ -5,23 +5,26 @@
   ...
 }:
 {
-  environment.variables = {
+  environment.sessionVariables = {
     # Wayland first, falling back to XWayland for apps that only speak X11.
+    # GTK already does this by default, so only Qt and Electron need telling.
     QT_QPA_PLATFORM = "wayland;xcb";
-    GDK_BACKEND = "wayland,x11";
+    NIXOS_OZONE_WL = "1";
     GTK_IM_MODULE = "none";
-    COLORTERM = "truecolor";
   };
+
+  environment.variables.COLORTERM = "truecolor";
 
   # Input lag in emacs without this
   i18n.inputMethod.enable = false;
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
+  # Still needed on a Wayland-only desktop: the nvidia module only adds
+  # nvidia, nvidia_modeset and nvidia_drm to boot.kernelModules when this is
+  # enabled.
   services.xserver = {
     enable = true;
     videoDrivers = [ "nvidia" ];
-    xkb.layout = "us";
+    excludePackages = [ pkgs.xterm ];
   };
 
   services.displayManager.gdm = {
@@ -51,8 +54,6 @@
     snapshot
     yelp
   ];
-
-  hardware.graphics.enable = true;
 
   hardware.nvidia = {
     modesetting.enable = true;

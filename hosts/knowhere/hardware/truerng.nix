@@ -10,7 +10,8 @@
   '';
 
   systemd.services.rngd = {
-    # Clean shutdown without DefaultDependencies
+    # DefaultDependencies is off below so the unit can start before sysinit,
+    # which also drops the implicit shutdown ordering; restore it by hand.
     conflicts = [ "shutdown.target" ];
     wantedBy = [ "multi-user.target" ];
     before = [
@@ -20,13 +21,11 @@
 
     description = "Hardware RNG Entropy Gatherer Daemon";
 
-    # rngd may have to start early to avoid entropy starvation during boot with encrypted swap
+    # Feed the pool as early in boot as possible.
     unitConfig.DefaultDependencies = false;
 
     serviceConfig = {
       ExecStart = "${lib.getExe' pkgs.rng-tools "rngd"} --foreground --rng-device=/dev/hwrandom --random-device=/dev/random";
-      # PrivateTmp would introduce a circular dependency if /tmp is on tmpfs and swap is encrypted,
-      # thus depending on rngd before swap, while swap depends on rngd to avoid entropy starvation.
       NoNewPrivileges = true;
       PrivateNetwork = true;
       ProtectSystem = "full";
