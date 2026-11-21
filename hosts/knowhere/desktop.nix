@@ -33,10 +33,23 @@
 
   services.desktopManager.gnome.enable = true;
 
-  # Brave and Ghostty replace these.
+  # Unused stock apps; Brave and Ghostty replace Epiphany and Console.
   environment.gnome.excludePackages = with pkgs; [
+    decibels
     epiphany
+    gnome-calendar
+    gnome-characters
+    gnome-connections
     gnome-console
+    gnome-contacts
+    gnome-maps
+    gnome-music
+    gnome-tour
+    gnome-weather
+    showtime
+    simple-scan
+    snapshot
+    yelp
   ];
 
   hardware.graphics.enable = true;
