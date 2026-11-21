@@ -19,7 +19,6 @@
     gnome-tweaks
     gnumake
     jq
-    libvterm
     nh
     nix-output-monitor
     nixfmt
