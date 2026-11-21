@@ -2,16 +2,19 @@
   lib,
   buildNpmPackage,
   fetchurl,
+  pkg-config,
+  libsecret,
+  stdenv,
 }:
 
 buildNpmPackage (finalAttrs: {
   npmDepsFetcherVersion = 2;
   pname = "cli-microsoft365";
-  version = "11.10.0";
+  version = "12.0.0";
 
   src = fetchurl {
     url = "https://registry.npmjs.org/@pnp/cli-microsoft365/-/cli-microsoft365-${finalAttrs.version}.tgz";
-    hash = "sha256-RPRW8NefSol1WfjIsce7KtqyoZEZdeaSo5yVfLLf2Oo=";
+    hash = "sha256-j5bVytavBeuMD1vIW3+cQ6jN5aCRLxP0W2uafyH7iNQ=";
   };
 
   # The published npm-shrinkwrap.json has `resolved`/`integrity` stripped from
@@ -22,9 +25,16 @@ buildNpmPackage (finalAttrs: {
     cp ${./package-lock.json} package-lock.json
   '';
 
-  npmDepsHash = "sha256-pCLadT8ffP6i4XM1/oVZiOYZzIf4uMAKtCfqqXE+tfE=";
+  npmDepsHash = "sha256-yZF+T3/88dEcaQ2olILAqx2pzhxGPsU5poB0c17wN7I=";
 
   npmFlags = [ "--omit=dev" ];
+
+  # 12.0.0 added @azure/msal-node-extensions as an optional dependency, to keep
+  # the token cache in the OS keychain. It pulls in keytar, a native addon
+  # that has no network to fetch a prebuilt binary and so compiles here:
+  # against libsecret on Linux, and the system Security framework on macOS.
+  nativeBuildInputs = [ pkg-config ];
+  buildInputs = lib.optionals stdenv.hostPlatform.isLinux [ libsecret ];
 
   # The published tarball ships a prebuilt dist/; we only install + wrap.
   dontNpmBuild = true;
