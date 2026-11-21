@@ -64,12 +64,13 @@
     interfaces."eno1" = {
       allowedTCPPorts = [ 22 ];
     };
+    # Syncthing is TCP only here: the peers above are pinned to tcp://, so the
+    # QUIC port (UDP 22000) stays closed.
     interfaces."tailscale0" = {
       allowedTCPPorts = [
         22
         22000
       ];
-      allowedUDPPorts = [ 22000 ];
     };
   };
 }
