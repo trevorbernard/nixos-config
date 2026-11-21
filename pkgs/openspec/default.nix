@@ -7,11 +7,11 @@
 buildNpmPackage (finalAttrs: {
   npmDepsFetcherVersion = 2;
   pname = "openspec";
-  version = "1.6.0";
+  version = "2.1.1";
 
   src = fetchurl {
     url = "https://registry.npmjs.org/@fission-ai/openspec/-/openspec-${finalAttrs.version}.tgz";
-    hash = "sha256-qAR3dn6Ypi6VZGStCaRLKMrMT8v94jdl97S6WY7hOFk=";
+    hash = "sha256-ifINMRyWQIr/jQq9iAoGPfFT9+w6eoq/QY0nr6KYRAw=";
   };
 
   # The npmjs tarball doesn't ship package-lock.json (npm strips it on
@@ -20,7 +20,7 @@ buildNpmPackage (finalAttrs: {
     cp ${./package-lock.json} package-lock.json
   '';
 
-  npmDepsHash = "sha256-tMBlolxvW0gvivlMy6kOJ2QdEdPCmR6C787zc8oWmlA=";
+  npmDepsHash = "sha256-Vn23zQX9S1F7agFF/qLuztnrjH/UjP5ItTBzDkCj0Dw=";
 
   npmFlags = [ "--omit=dev" ];
 
