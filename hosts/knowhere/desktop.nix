@@ -28,6 +28,9 @@
     enable = true;
   };
 
+  # GDM's greeter can't see ~/.config/monitors.xml; without this it picks its own scale.
+  environment.etc."xdg/monitors.xml".source = ./monitors.xml;
+
   services.desktopManager.gnome.enable = true;
 
   hardware.graphics.enable = true;
