@@ -62,7 +62,6 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-  nixpkgs.config.nvidia.acceptLicense = true;
 
   # jetbrains-mono comes from modules/shared/fonts.nix; these are desktop-only.
   fonts.packages = with pkgs; [
@@ -72,7 +71,6 @@
   ];
 
   programs.dconf = {
-    enable = true;
     profiles.user.databases = [
       {
         lockAll = true;
