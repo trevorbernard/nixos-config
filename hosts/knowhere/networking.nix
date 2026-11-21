@@ -62,20 +62,14 @@
 
   networking.firewall = {
     interfaces."eno1" = {
-      allowedTCPPorts = [
-        22
-        8888
-      ];
+      allowedTCPPorts = [ 22 ];
     };
     interfaces."tailscale0" = {
       allowedTCPPorts = [
         22
         22000
       ];
-      allowedUDPPorts = [
-        22000
-        21027
-      ];
+      allowedUDPPorts = [ 22000 ];
     };
   };
 }

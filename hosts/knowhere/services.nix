@@ -20,8 +20,13 @@
 
   services.openssh = {
     enable = true;
+    # Port 22 is opened per interface in networking.nix instead.
+    openFirewall = false;
     settings = {
       PasswordAuthentication = false;
+      # With UsePAM, keyboard-interactive is a second route to password login
+      # that PasswordAuthentication alone leaves open.
+      KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
     };
   };
