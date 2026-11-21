@@ -46,6 +46,7 @@
 
   # jetbrains-mono comes from modules/shared/fonts.nix; these are desktop-only.
   fonts.packages = with pkgs; [
+    cantarell-fonts
     fira-code
     nerd-fonts.fira-code
   ];
@@ -74,6 +75,8 @@
             # adw-gtk3 itself is installed in users.nix.
             gtk-theme = "adw-gtk3-dark";
             gtk-key-theme = "Emacs";
+            font-name = "Cantarell 12";
+            document-font-name = "Cantarell 12";
             monospace-font-name = "Fira Code 12 @wght=400";
             font-antialiasing = "rgba";
             font-hinting = "full";
