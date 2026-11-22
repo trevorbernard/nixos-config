@@ -1,5 +1,6 @@
 {
   lib,
+  stdenv,
   rustPlatform,
   fetchCrate,
   cacert,
@@ -38,6 +39,12 @@ rustPlatform.buildRustPackage (finalAttrs: {
     export NO_COLOR=1
     export SSL_CERT_FILE="${cacert}/etc/ssl/certs/ca-bundle.crt"
   '';
+
+  # Fails intermittently on Darwin: the fake gopass shim returns an empty
+  # value when reading back a binary entry.
+  checkFlags = lib.optionals stdenv.hostPlatform.isDarwin [
+    "--skip=gopass_preserves_generated_whitespace"
+  ];
 
   # A test binds to localhost, which requires an explicit Darwin sandbox exception.
   __darwinAllowLocalNetworking = true;
