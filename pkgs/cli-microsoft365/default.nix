@@ -36,6 +36,22 @@ buildNpmPackage (finalAttrs: {
   nativeBuildInputs = [ pkg-config ];
   buildInputs = lib.optionals stdenv.hostPlatform.isLinux [ libsecret ];
 
+  # keytar is archived and pins node-addon-api 4.3.0, whose napi.h casts -1 to
+  # an enum in a constant expression. clang >= 20 (the Darwin stdenv) makes
+  # that a hard error with no flag to downgrade it; gcc accepts it. Hold the
+  # install scripts back so the header can be patched first, then run them.
+  # 15 is the top of the enum's valid range and not a real array type, so it
+  # still works as the "unknown" sentinel; keytar never touches TypedArray.
+  npmRebuildFlags = [ "--ignore-scripts" ];
+
+  preBuild = ''
+    substituteInPlace node_modules/node-addon-api/napi.h \
+      --replace-fail 'unknown_array_type = static_cast<napi_typedarray_type>(-1);' \
+                     'unknown_array_type = static_cast<napi_typedarray_type>(15);'
+    npm rebuild $npmFlags
+    patchShebangs node_modules
+  '';
+
   # The published tarball ships a prebuilt dist/; we only install + wrap.
   dontNpmBuild = true;
 
