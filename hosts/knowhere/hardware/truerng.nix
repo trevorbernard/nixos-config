@@ -3,7 +3,7 @@
 {
   environment.systemPackages = [ pkgs.rng-tools ];
 
-  # Rules for mounting TrueRNG. https://ubld.it/truerng_v3
+  # https://ubld.it/truerng_v3
   # SYSTEMD_WANTS starts rngd whenever the dongle appears, at boot or on
   # hotplug, instead of unconditionally at boot.
   services.udev.extraRules = ''

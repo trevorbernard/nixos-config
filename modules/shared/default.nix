@@ -1,4 +1,3 @@
-# Configuration common to every host, NixOS and nix-darwin alike.
 {
   imports = [
     ./aspell.nix

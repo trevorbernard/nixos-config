@@ -182,8 +182,6 @@
         }
       );
 
-      # `nix flake check` builds every host toplevel and package belonging to
-      # the system it runs on, plus a formatting gate.
       checks = forEachSystem (
         pkgs:
         let

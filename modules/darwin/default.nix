@@ -15,15 +15,13 @@
       "spotify"
       "supacode"
     ];
-    # herdr now comes from the flake input via modules/shared/packages.nix,
-    # which pins it; the brew tracked whatever was installed at the time.
     brews = [
       "gnupg"
     ];
   };
 
   # Registers the Nix zsh in /etc/shells so it is a valid chsh target, matching
-  # what knowhere does. Without it macOS rejects the shell set just below.
+  # what knowhere does.
   environment.shells = [ pkgs.zsh ];
 
   # programs.zsh.enable already defaults to true here. These are the flat

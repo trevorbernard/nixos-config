@@ -28,7 +28,7 @@ while [[ $# -gt 0 ]]; do
     --all)     DELETE_ALL=true; shift ;;
     --dry-run) DRY_RUN=true; shift ;;
     -h|--help)
-      grep '^#' "$0" | grep -v '^#!' | sed 's/^# \?//'
+      sed -n '2,/^[^#]/s/^# \?//p' "$0"
       exit 0 ;;
     *) echo "unknown option: $1" >&2; exit 1 ;;
   esac
@@ -43,8 +43,8 @@ size_before=$(du -sh /nix/store 2>/dev/null | cut -f1)
 echo "Nix store size before: ${size_before}"
 echo
 
-# 1. Prune profile generations. GC only reclaims space once nothing references
-#    a path, and old generations are the references that pin dead paths.
+# GC only reclaims space once nothing references a path, and old generations
+# are the references that pin dead paths.
 if $DELETE_ALL; then
   echo "==> Deleting all old generations (keeping current)"
   run sudo nix-collect-garbage --delete-old
@@ -55,12 +55,10 @@ elif [[ -n "$AGE" ]]; then
   run nix-collect-garbage --delete-older-than "$AGE"
 fi
 
-# 2. Garbage-collect unreferenced store paths.
 echo
 echo "==> Collecting garbage"
 run sudo nix store gc
 
-# 3. Deduplicate: replace identical files with hard links.
 echo
 echo "==> Optimising store (hard-linking duplicates)"
 run sudo nix store optimise

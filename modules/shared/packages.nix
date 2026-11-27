@@ -14,8 +14,6 @@ in
   '';
 
   config = {
-    # Installs direnv + nix-direnv and wires up the shell hook; works on both
-    # NixOS and nix-darwin, so it replaces the bare direnv/nix-direnv packages.
     programs.direnv.enable = true;
 
     environment.variables.EDITOR = "emacs";

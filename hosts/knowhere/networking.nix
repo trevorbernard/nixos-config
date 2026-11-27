@@ -1,9 +1,6 @@
 { ... }:
 {
   networking.networkmanager.enable = true;
-  # NetworkManager owns interface config; disable the global DHCP default
-  # (set by hardware-configuration.nix) to avoid a redundant DHCP client.
-  networking.useDHCP = false;
   networking.networkmanager.ensureProfiles.profiles = {
     "Wired connection 1" = {
       connection = {

@@ -19,7 +19,6 @@
   };
 
   config = {
-    # Available on every host.
     my.aspellDicts = [
       "en"
       "en-computers"
