@@ -40,10 +40,7 @@
     fi
   '';
 
-  users.users.tbernard = {
-    home = "/Users/tbernard";
-    shell = pkgs.zsh;
-  };
+  users.users.tbernard.home = "/Users/tbernard";
   system.primaryUser = "tbernard";
 
   # reattach makes Touch ID reachable from inside tmux, whose sessions are
