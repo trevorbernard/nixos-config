@@ -35,11 +35,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    herdr = {
-      url = "github:ogulcancelik/herdr/v0.9.5";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     tuicr = {
       url = "github:agavra/tuicr/v0.29.0";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -72,7 +67,6 @@
       tumbler,
       hunk,
       claude-code-overlay,
-      herdr,
       tuicr,
       rex,
       nix-index-database,
@@ -110,7 +104,6 @@
           termcopy = termcopy.packages.${final.stdenv.hostPlatform.system}.default;
           tumbler = tumbler.packages.${final.stdenv.hostPlatform.system}.default;
           hunk = hunk.packages.${final.stdenv.hostPlatform.system}.default;
-          herdr = herdr.packages.${final.stdenv.hostPlatform.system}.default;
           tuicr = tuicr.packages.${final.stdenv.hostPlatform.system}.default;
         })
         (final: _: {

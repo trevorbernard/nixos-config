@@ -1,6 +1,6 @@
 ---
 name: update-flake-inputs
-description: Use when asked to update, bump, or check for new releases of a tag-pinned flake input (termcopy, tumbler, hunk, herdr, tuicr), of rex, or of nix-index-database (the comma / nix-locate package index) in this repo.
+description: Use when asked to update, bump, or check for new releases of a tag-pinned flake input (termcopy, tumbler, hunk, tuicr), of rex, or of nix-index-database (the comma / nix-locate package index) in this repo.
 ---
 
 # Update Flake Inputs
@@ -12,7 +12,6 @@ nix-index-database.
 |---|---|---|
 | termcopy, tumbler | github:trevorbernard/… | release tag in the flake.nix URL |
 | hunk | github:modem-dev/hunk | release tag in the flake.nix URL |
-| herdr | github:ogulcancelik/herdr | release tag in the flake.nix URL |
 | tuicr | github:agavra/tuicr | release tag in the flake.nix URL |
 | rex | pkgs.superlogical.com | `preview` channel tarball |
 | nix-index-database | github:nix-community/nix-index-database | default branch; upstream has no tags |
@@ -29,7 +28,7 @@ Not covered here:
 1. List what is behind:
 
    ```bash
-   for i in termcopy tumbler hunk herdr tuicr; do
+   for i in termcopy tumbler hunk tuicr; do
      cur=$(grep -oE "github:[^/]+/$i/v[0-9.]+" flake.nix)
      repo=${cur#github:}; repo=${repo%/v*}
      new=$(gh api "repos/$repo/releases/latest" --jq .tag_name)
