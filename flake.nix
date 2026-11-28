@@ -114,14 +114,7 @@
           tuicr = tuicr.packages.${final.stdenv.hostPlatform.system}.default;
         })
         (final: _: {
-          atuin = nixpkgs-unstable.legacyPackages.${final.stdenv.hostPlatform.system}.atuin;
-        })
-        (_: prev: {
-          # Impure test: reads a real /nix/store file (unsandboxed on darwin) and
-          # fails if its contents happen to contain the word "Error".
-          mcp-nixos = prev.mcp-nixos.overridePythonAttrs (old: {
-            disabledTests = (old.disabledTests or [ ]) ++ [ "test_read_text_file" ];
-          });
+          inherit (nixpkgs-unstable.legacyPackages.${final.stdenv.hostPlatform.system}) atuin mcp-nixos;
         })
         (final: _: {
           cli-microsoft365 = final.callPackage ./pkgs/cli-microsoft365 { };
